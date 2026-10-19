@@ -1,0 +1,26 @@
+[INFO]: Parsing configuration from: isaaclab_tutorial.tasks.place_vial.config.so101.env_cfg:SO101VialEnvCfg
+[INFO]: Base environment:
+	Environment device    : cuda:0
+	Environment seed      : 42
+	Physics step-size     : 0.008333333333333333
+	Rendering step-size   : 0.03333333333333333
+	Environment step-size : 0.03333333333333333
+I: Initializing Version 2.74.0-release.7316+gl.ec99a64b
+I: Client ID: N8E7DB93
+I: ThreadId(02) hub_client::client::Client::new Launching client mode=Shared with_cleaner=false cache_path=None cache_size=None
+I: ThreadId(03) launch self=Launcher { discovery_lock: RwLock { lock: RwLock { inner: File { handle: 0xbc8, path: "\\\\?\\E:\\Winter\\Morph\\data\\runtime-temp\\hub-Harshita.lock" } } }, mode: Shared, with_cleaner: false, config_file: "E:\\Winter\\Morph\\data\\runtime-temp\\hub-Harshita-43970145.config.json" } cmd="hub.exe" "--mode=shared" "--write-config" "E:\\Winter\\Morph\\data\\runtime-temp\\hub-Harshita-43970145.config.json" "--"
+I: Not using Hub: Hub not found
+I: Successfully created S3 provider for https://omniverse-content-production.s3-us-west-2.amazonaws.com
+I: Using CloudFront http://dcb18d6mfegct.cloudfront.net/, List = No
+Serving remote assets from the local cache under 'E:\Winter\Morph\data\runtime-temp'. Each copy is checked against the server before use; delete the directory to force a full re-download.
+E:\Winter\Morph\vendor\IsaacLabTutorial\.venv\Lib\site-packages\isaaclab_newton\cloner\newton_clone_utils.py:165: FutureWarning: Newton shape color replacement is enabled; this workaround will be deprecated in a future release.
+  replace_newton_builder_shape_colors(builder, stage)
+[INFO]: Time taken for scene creation Last: 40.335052 s, Mean: 40.335052 s, Std: 0.000000 s, N: 1
+[INFO]: Scene manager:  <class InteractiveScene>
+	Number of environments: 1
+	Environment spacing   : 0.9
+	Source prim name      : /World/envs/env_0
+	Global prim paths     : []
+	Replicate physics     : True
+Finalize builder took: Last: 6.735247 s, Mean: 6.735247 s, Std: 0.000000 s, N: 1
+Failed to get root com velocity. If the articulation is fixed, this is expected. Setting root com velocity to zeros.

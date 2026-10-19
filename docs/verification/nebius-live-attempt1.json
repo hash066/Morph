@@ -1,0 +1,13 @@
+{
+  "kind": "live_nebius_nemotron_planner_attempt",
+  "model": "nvidia/Nemotron-3_5-Lightning",
+  "status": "rejected_by_morph_validation",
+  "input_tokens": 396,
+  "output_tokens": 2048,
+  "actual_cost_usd": 0.00051528,
+  "latency_seconds": 7.218,
+  "recovery_claimed": false,
+  "raw_response_retained": false,
+  "automatic_retry_performed": false,
+  "reason": "The response exhausted its bounded output allocation and did not produce a validated Proposal."
+}

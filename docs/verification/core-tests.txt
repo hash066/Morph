@@ -1,0 +1,25 @@
+....................................                                     [100%]
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  E:\Winter\Morph\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=============================== tests coverage ================================
+_______________ coverage: platform win32, python 3.11.9-final-0 _______________
+
+Name                      Stmts   Miss  Cover   Missing
+-------------------------------------------------------
+src\morph\__init__.py         0      0   100%
+src\morph\__main__.py        34     34     0%   1-58
+src\morph\api.py             67      8    88%   20, 79-83, 101-102
+src\morph\contracts.py      113      4    96%   78, 80, 84, 123
+src\morph\evaluation.py      61      9    85%   12, 20, 42, 52, 56, 58, 80-82
+src\morph\evidence.py        40      4    90%   16, 18, 33, 42
+src\morph\planner.py        101     10    90%   49, 68, 79, 82, 99, 102, 126, 131, 161, 172
+src\morph\protocol.py        53      9    83%   29, 31, 33, 46, 49, 51, 53, 55, 71
+src\morph\store.py          128      1    99%   192
+-------------------------------------------------------
+TOTAL                       597     79    87%
+Required test coverage of 80% reached. Total coverage: 86.77%
+36 passed, 1 warning in 9.98s

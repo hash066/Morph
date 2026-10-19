@@ -1,0 +1,84 @@
+{
+  "tutorial_commit": "9a4286b4bc8a5720ac97f87e5e0140f7542c22d9",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "821676de20867ee55cdfa2697b9b77b1d35a7c4cbc13f7295915b393e36085f7",
+      "bytes": 11563,
+      "lfs_pointer": false
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "6dc6e70f4438b6471816fb2ecb2b3112c410709bd44f302f2f8c757ef3d78561",
+      "bytes": 3181,
+      "lfs_pointer": false
+    },
+    {
+      "path": "uv.lock",
+      "sha256": "18ff6652cdf54dd18367830a6d2e15904920405099f8f11852070edf50dac16a",
+      "bytes": 178485,
+      "lfs_pointer": false
+    },
+    {
+      "path": "src/isaaclab_tutorial/utils/evaluation.py",
+      "sha256": "02d2fed0a8f57043ee9bce8b77a78e06da7b85155b0b7a87167593c2a2a066a4",
+      "bytes": 13488,
+      "lfs_pointer": false
+    },
+    {
+      "path": "src/isaaclab_tutorial/tasks/place_vial/mdp/terminations.py",
+      "sha256": "6aa5b6aaa5721ee2d0fb2e7fc92f739ca6c1890744551ec3f3d94870be065110",
+      "bytes": 5747,
+      "lfs_pointer": false
+    },
+    {
+      "path": "src/isaaclab_tutorial/tasks/place_vial/config/so101/env_cfg.py",
+      "sha256": "98026c8a80170f104dc88d7ff5a10fdf76998d02f6d5029196418b7970a8c455",
+      "bytes": 34714,
+      "lfs_pointer": false
+    },
+    {
+      "path": "src/isaaclab_tutorial/assets/reset_poses.pt",
+      "sha256": "388771453ab7e4128ac1bb8410583bac62119324b7290110c22501edd43bbac5",
+      "bytes": 96633,
+      "lfs_pointer": false
+    },
+    {
+      "path": "src/isaaclab_tutorial/assets/workshop/desk.usda",
+      "sha256": "1ce273ddd9054c173d0a6f9eead693a280fa5bcae35e670c2edc9f1690559956",
+      "bytes": 1538,
+      "lfs_pointer": false
+    },
+    {
+      "path": "src/isaaclab_tutorial/assets/workshop/rack.usda",
+      "sha256": "3b2c32a08aae30a58321490eca0fab5342b696b38346379179b8da85496ec8e6",
+      "bytes": 5217,
+      "lfs_pointer": false
+    },
+    {
+      "path": "src/isaaclab_tutorial/assets/workshop/rack_simple.usda",
+      "sha256": "e587cf23553ac24965da3a844e7f5db52655dda52c8d511a05b894258f1de872",
+      "bytes": 1458887,
+      "lfs_pointer": false
+    },
+    {
+      "path": "src/isaaclab_tutorial/assets/workshop/vial.usda",
+      "sha256": "21689f823db57bcb1a3ad33cdc65e8e7aca605e9cba2e13cdf1574a17ec8a7d1",
+      "bytes": 1987,
+      "lfs_pointer": false
+    },
+    {
+      "path": "src/isaaclab_tutorial/assets/workshop/vial_labeled.usda",
+      "sha256": "defa82a761d4a7bc1322eeb39fc236c6d0ab06d67f08fb9e786c467cca8c57d1",
+      "bytes": 1983,
+      "lfs_pointer": false
+    },
+    {
+      "path": "src/isaaclab_tutorial/assets/workshop/vial_opaque.usda",
+      "sha256": "f5fbd3b8aa9caa69d1b8e3b54bb113d81fe4ea3ac9661f479c3c57e702aa90ed",
+      "bytes": 1930723,
+      "lfs_pointer": false
+    }
+  ],
+  "policy_checkpoint": null
+}

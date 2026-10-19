@@ -1,0 +1,7 @@
+STDOUT
+
+STDERR
+warning: `VIRTUAL_ENV=E:\Winter\Morph\.venv` does not match the project environment path `.venv` and will be ignored; use `--active` to target the active environment instead
+##################################################################
+#  PXR_WORK_THREAD_LIMIT is overridden to '1'.  Default is '0'.  #
+##################################################################

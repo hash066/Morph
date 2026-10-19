@@ -1,0 +1,15 @@
+{
+  "models": [
+    "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "nvidia/Nemotron-3_5-Lightning",
+    "nvidia/Nemotron-3-Ultra-550b-a55b",
+    "nvidia/nemotron-3-super-120b-a12b",
+    "nvidia/Nemotron-3.5-Super-VL"
+  ],
+  "credit_verified": false,
+  "checked_at": "2026-10-19T03:34:32.4008319Z",
+  "kind": "authenticated_model_catalog",
+  "inference_performed": false,
+  "unauthenticated_negative_control_status": 401,
+  "key_authentication_verified": true
+}

@@ -1,0 +1,22 @@
+# Local verification summary
+
+19 October 2026, Windows, Python 3.11.9, project E:/Winter/Morph.
+
+- Initial package import failed because editable installation ran before src/morph existed.
+  Fixed by rebuilding only morph-recovery; import now resolves to this project.
+- Initial type check found an inferred str for a Literal decision; fixed with explicit union.
+- Latest completed suite: 36 passed, 86.77% line coverage.
+- Expanded suite results: see core-tests.txt (machine output).
+- Types: see core-types.txt.
+- Ruff check/format completed successfully; final check recorded separately.
+- uv build produced wheel and sdist successfully. This is a core package build, not a GPU image.
+- git diff --check passed; current implementation is uncommitted in the fresh repository.
+- FastAPI test client emits an upstream Starlette httpx deprecation warning; tests still pass.
+- No live provider, simulator rollout, browser journey or physical trial is covered by these tests.
+
+Security scope: locally tested bearer auth, fixed HTTPS provider endpoints/no redirects,
+unknown tool fields, invalid candidate bounds, held-out exclusion, no model-code execution,
+concurrent durable budget reservations, immutable artifacts and terminal lease transitions.
+No claim of full production security review or OS sandboxing. Local single-user deployment only.
+
+

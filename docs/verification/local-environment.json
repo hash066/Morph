@@ -1,0 +1,6 @@
+{
+  "platform": "Windows-10-10.0.26200-SP0",
+  "python": "3.11.9",
+  "gpu": "name, driver_version, memory.total [MiB]\nNVIDIA GeForce RTX 3050 Laptop GPU, 581.80, 4096 MiB",
+  "cloud_provisioned": false
+}

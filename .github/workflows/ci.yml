@@ -1,0 +1,15 @@
+name: core
+on: [push, pull_request]
+jobs:
+  core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.8"
+      - run: uv sync --locked --python 3.11
+      - run: uv run ruff check src tests
+      - run: uv run mypy
+      - run: uv run pytest --cov=morph --cov-report=term-missing --cov-fail-under=80
+      - run: uv build

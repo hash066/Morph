@@ -1,0 +1,9 @@
+Seed not set for the environment. The environment creation may not be deterministic.
+I: Initializing Version 2.74.0-release.7316+gl.ec99a64b
+I: Client ID: 7HHG50UD
+I: ThreadId(02) hub_client::client::Client::new Launching client mode=Shared with_cleaner=false cache_path=None cache_size=None
+I: ThreadId(03) launch self=Launcher { discovery_lock: RwLock { lock: RwLock { inner: File { handle: 0xac4, path: "\\\\?\\E:\\Winter\\Morph\\data\\runtime-temp\\hub-Harshita.lock" } } }, mode: Shared, with_cleaner: false, config_file: "E:\\Winter\\Morph\\data\\runtime-temp\\hub-Harshita-E8A2B568.config.json" } cmd="hub.exe" "--mode=shared" "--write-config" "E:\\Winter\\Morph\\data\\runtime-temp\\hub-Harshita-E8A2B568.config.json" "--"
+I: Not using Hub: Hub not found
+I: Successfully created S3 provider for https://omniverse-content-production.s3-us-west-2.amazonaws.com
+I: Using CloudFront http://dcb18d6mfegct.cloudfront.net/, List = No
+Serving remote assets from the local cache under 'E:\Winter\Morph\data\runtime-temp'. Each copy is checked against the server before use; delete the directory to force a full re-download.

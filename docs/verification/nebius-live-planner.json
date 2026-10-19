@@ -1,0 +1,13 @@
+{
+  "checked_at": "2026-10-19T05:18:27.486198+00:00",
+  "kind": "live_nebius_nemotron_planner_check",
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "proposal": {
+    "hypotheses": [],
+    "candidate_id": null,
+    "reason": "No observations provided to evaluate candidates.",
+    "decision": "insufficient_evidence"
+  },
+  "simulation_observations_supplied": 0,
+  "recovery_claimed": false
+}
