@@ -1,8 +1,9 @@
 # Morph
 
 Simulation-first recovery investigation for the SO-101 vial-placement task.
-Current delivery is a tested orchestration/evidence core and a pinned feasibility spike.
-**No recovery performance or live Nebius execution has been demonstrated.** See docs/STATUS.md.
+Current delivery includes the tested evidence core, a frozen held-out simulation experiment,
+real Nemotron selection through Nebius Token Factory, and an authenticated React workbench.
+The n=8 point result is promising but statistically inconclusive. See docs/STATUS.md.
 
 ## Local setup
 
@@ -27,7 +28,17 @@ API requests require `Authorization: Bearer <MORPH_API_TOKEN>`. OpenAPI is at /d
 Default storage is data/morph.sqlite; no secrets or runtime data are tracked. Jobs submitted
 through the API currently receive a truthful 409 until simulation feasibility is verified.
 No automatic GPU provisioning, training, model call or hardware motion occurs on startup.
-React UI is deferred under the lead assignment's explicit feasibility gate.
+Run the React workbench in a second terminal:
+
+```powershell
+cd web
+npm install
+npm run dev
+```
+
+Open http://127.0.0.1:4173 and enter the same local API token. The Vite development server
+proxies `/api` to port 8091. The workbench labels frozen simulation evidence accurately and
+keeps physical motion disabled.
 
 ## Simulator spike
 

@@ -7,7 +7,11 @@ def test_api_auth_gate_empty_and_export(store, manifest):
     client = TestClient(create_app(store, "t" * 32))
     assert client.get("/api/v1/status").status_code == 401
     client.headers["Authorization"] = "Bearer " + "t" * 32
-    assert client.get("/api/v1/status").json()["simulation_gate"] == "blocked"
+    assert client.get("/api/v1/status").json()["simulation_gate"] == "evaluated"
+    summary = client.get("/api/v1/evidence/summary")
+    assert summary.json()["morph_report"]["candidate_successes"] == 8
+    assert client.get("/api/v1/evidence/audits/morph").json()["summary"]["unsafe_rack_contacts"] == 0
+    assert client.get("/api/v1/evidence/audits/secret").status_code == 404
     assert client.get("/api/v1/runs").json() == {"data": []}
     assert client.post("/api/v1/runs", json=manifest.model_dump(mode="json")).status_code == 409
     assert store.list() == []

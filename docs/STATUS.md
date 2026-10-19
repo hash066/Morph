@@ -21,7 +21,7 @@ the full recovery product and first live gate are not complete.
 | Auditable simulator runner | IMPLEMENTED / LOCALLY TESTED: fixed command, bounded starts, checkpoint/condition/action readback | src/morph/isaac_runner.py |
 | Nebius compute | BLOCKED: no verified project credits/quota/rates | environments/COMPUTE_GATE.md |
 | Live Nemotron inference | PASS: operator authorized $30 maximum; internal ledger capped at $1; measured spend $0.00099072 | docs/verification/nebius-live-summary.json |
-| React workbench/browser evidence | DEFERRED by explicit feasibility gate | BOOTSTRAP.md |
+| React workbench/browser evidence | IMPLEMENTED / BROWSER TESTED: authenticated investigation, experiment comparison, and evidence views load real API evidence; responsive navigation verified | web/, docs/verification/heldout-summary.json |
 | Hardware | DISABLED: no supervised approved setup | no motion adapter exists |
 | Usability/buyer evidence | NOT PERFORMED; blank protocol ready | docs/STUDY_PROTOCOL.md |
 

@@ -13,6 +13,9 @@ from morph.contracts import Budget, RecoveryPackage, RunManifest, RunResult
 from morph.evidence import export_bundle
 from morph.store import Conflict, Store
 
+ROOT = Path(__file__).resolve().parents[2]
+VERIFICATION = ROOT / "docs" / "verification"
+
 
 def create_app(store: Store | None = None, token: str | None = None) -> FastAPI:
     access_token = token or os.environ.get("MORPH_API_TOKEN", "")
@@ -30,14 +33,39 @@ def create_app(store: Store | None = None, token: str | None = None) -> FastAPI:
 
     @app.get("/api/v1/status")
     def status():
-        provider_verified = Path("docs/verification/nebius-live-planner.json").is_file()
+        provider_verified = (VERIFICATION / "nebius-recovery-selection.json").is_file()
+        summary_ready = (VERIFICATION / "heldout-summary.json").is_file()
         return {
             "mode": "Simulation",
-            "simulation_gate": "blocked",
-            "reason": "Baseline training active; recovery and controller sensitivity not yet verified",
+            "simulation_gate": "evaluated" if summary_ready else "blocked",
+            "reason": (
+                "Frozen held-out evaluation complete; statistical recovery gate remains inconclusive"
+                if summary_ready
+                else "Held-out evidence is incomplete"
+            ),
             "hardware": "disabled",
             "provider": "live_verified" if provider_verified else "not_live_verified",
         }
+
+    @app.get("/api/v1/evidence/summary")
+    def evidence_summary():
+        path = VERIFICATION / "heldout-summary.json"
+        if not path.is_file():
+            raise HTTPException(404, "Held-out evidence is not available")
+        return json.loads(path.read_text(encoding="utf-8"))
+
+    @app.get("/api/v1/evidence/audits/{audit_name}")
+    def evidence_audit(audit_name: str):
+        allowed = {
+            "nominal": "baseline-model799-audit.json",
+            "fault": "heldout-fault-baseline.json",
+            "morph": "heldout-morph-balanced75.json",
+            "random": "heldout-random-arm67-jaw80.json",
+        }
+        filename = allowed.get(audit_name)
+        if filename is None:
+            raise HTTPException(404, "Unknown evidence audit")
+        return json.loads((VERIFICATION / filename).read_text(encoding="utf-8"))
 
     @app.get("/api/v1/runs")
     def runs(limit: Annotated[int, Query(ge=1, le=100)] = 100, offset: Annotated[int, Query(ge=0)] = 0):

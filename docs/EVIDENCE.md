@@ -231,3 +231,12 @@ conservative interval is [-0.4603, 1.0], so Morph reports `no_validated_recovery
 claim statistical superiority. The deterministic evidence bundle is
 dist/morph-evidence-v1.zip; its SHA-256 and both reports are recorded in
 docs/verification/heldout-summary.json.
+
+## React workbench browser verification
+The React/TypeScript workbench reads only authenticated API evidence endpoints. The local
+browser test authenticated through the token gate and verified Investigation, Experiments,
+and Evidence views, including all held-out counts, safety outcomes, completion means, the
+inconclusive decision, and evidence bundle digest. Responsive navigation was corrected and
+retested at the available compact browser viewport. `npm run build` passed with 1,920 modules
+transformed and no dependency audit findings. No prerecorded run is labeled live, and the UI
+keeps physical motion disabled.
