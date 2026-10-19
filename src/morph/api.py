@@ -35,12 +35,12 @@ def create_app(store: Store | None = None, token: str | None = None) -> FastAPI:
     @app.get("/api/v1/status")
     def status():
         provider_verified = (VERIFICATION / "nebius-recovery-selection.json").is_file()
-        summary_ready = (VERIFICATION / "heldout-summary.json").is_file()
+        summary_ready = (VERIFICATION / "confirmation-summary.json").is_file()
         return {
             "mode": "Simulation",
             "simulation_gate": "evaluated" if summary_ready else "blocked",
             "reason": (
-                "Frozen held-out evaluation complete; statistical recovery gate remains inconclusive"
+                "Independent confirmation complete; simulation recovery gate passed"
                 if summary_ready
                 else "Held-out evidence is incomplete"
             ),
@@ -50,7 +50,7 @@ def create_app(store: Store | None = None, token: str | None = None) -> FastAPI:
 
     @app.get("/api/v1/evidence/summary")
     def evidence_summary():
-        path = VERIFICATION / "heldout-summary.json"
+        path = VERIFICATION / "confirmation-summary.json"
         if not path.is_file():
             raise HTTPException(404, "Held-out evidence is not available")
         return json.loads(path.read_text(encoding="utf-8"))
@@ -59,9 +59,9 @@ def create_app(store: Store | None = None, token: str | None = None) -> FastAPI:
     def evidence_audit(audit_name: str):
         allowed = {
             "nominal": "baseline-model799-audit.json",
-            "fault": "heldout-fault-baseline.json",
-            "morph": "heldout-morph-balanced75.json",
-            "random": "heldout-random-arm67-jaw80.json",
+            "fault": "confirmation-fault-baseline.json",
+            "morph": "confirmation-morph-balanced75.json",
+            "random": "confirmation-random-arm67-jaw80.json",
         }
         filename = allowed.get(audit_name)
         if filename is None:

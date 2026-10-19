@@ -1,0 +1,39 @@
+{
+  "format": "morph-confirmation-summary-v1",
+  "morph_report": {
+    "baseline_manifest": "b9fbebf0b5e29f61ad67491170e5d42de9a0b59b416eccc0aaaf0af0ea29f80f",
+    "candidate_manifest": "2d0ecddd44c998cac17bf15ec06129ce7660e47055ea275825011d873d9417ba",
+    "denominator": 40,
+    "baseline_successes": 15,
+    "candidate_successes": 39,
+    "paired_gain": 0.6,
+    "paired_gain_interval95": [
+      0.1705305916532624,
+      1.0
+    ],
+    "decision": "simulation_candidate",
+    "reason": "Paired simulation gain clears conservative interval; no physical approval.",
+    "total_wall_seconds": 139.226058,
+    "total_gpu_hours": 0.038673904999999995,
+    "total_cost_usd": 0.0
+  },
+  "random_report": {
+    "baseline_manifest": "b9fbebf0b5e29f61ad67491170e5d42de9a0b59b416eccc0aaaf0af0ea29f80f",
+    "candidate_manifest": "3afaf83b0d46f598ef571f7779a1d9fb138dfd0d17bbcddd9da071c55573c737",
+    "denominator": 40,
+    "baseline_successes": 15,
+    "candidate_successes": 39,
+    "paired_gain": 0.6,
+    "paired_gain_interval95": [
+      0.1705305916532624,
+      1.0
+    ],
+    "decision": "simulation_candidate",
+    "reason": "Paired simulation gain clears conservative interval; no physical approval.",
+    "total_wall_seconds": 140.01275299999998,
+    "total_gpu_hours": 0.038892431388888885,
+    "total_cost_usd": 0.0
+  },
+  "bundle_sha256": "30ad087c0ebad407da35e4aeba15a100e294806b5468d058166e8e91469817f4",
+  "bundle_bytes": 106147
+}

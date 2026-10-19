@@ -18,8 +18,9 @@ the full recovery product and first live gate are not complete.
 | Local simulator installation | PASS: 157 packages installed; 100-step smoke passed | docs/verification/simulator-install-local-temp.log |
 | Baseline/recovery simulation | PASS: official 800-iteration seed-42 PPO training completed; final model-799 nominal audit passed 8/8 with no aborts, timeouts, or unsafe rack contacts | docs/verification/baseline-model799-audit.json |
 | Perturbation and development recovery | PASS: 1.5x actuator drift reproduced 3/8 failure; controller compensation, Nemotron balanced-75, and matched random candidate each passed 8/8 development starts | docs/verification/frozen-protocol.json |
-| Frozen held-out evaluation | COMPLETE / INCONCLUSIVE: baseline 4/8; Morph 8/8 with 0 unsafe; random 8/8 with 1 unsafe. Point gain is +50 pp, but n=8 conservative interval crosses zero, so no validated-recovery claim | docs/verification/heldout-summary.json |
-| Evidence export | PASS: deterministic 22,800-byte bundle with content-addressed episode artifacts and checksums | dist/morph-evidence-v1.zip |
+| Frozen held-out pilot | COMPLETE / INCONCLUSIVE: baseline 4/8; Morph 8/8 with 0 unsafe; random 8/8 with 1 unsafe. Point gain +50 pp; n=8 interval crosses zero | docs/verification/heldout-summary.json |
+| Independent confirmation | PASS: preregistered new starts 80..119; baseline 15/40 with 13 unsafe; Morph 39/40 with 1 unsafe; paired gain +60 pp, conservative 95% interval [0.171, 1.0] | docs/verification/confirmation-summary.json |
+| Evidence export | PASS: deterministic 106,147-byte confirmation bundle with content-addressed episode artifacts and checksums | dist/morph-confirmation-evidence-v1.zip |
 | Auditable simulator runner | IMPLEMENTED / LOCALLY TESTED: fixed command, bounded starts, checkpoint/condition/action readback | src/morph/isaac_runner.py |
 | Nebius compute | BLOCKED: no verified project credits/quota/rates | environments/COMPUTE_GATE.md |
 | Live Nemotron inference | PASS: operator authorized $30 maximum; internal ledger capped at $1; 6 measured calls cost $0.00288942 total; real evidence-driven experiment selected | docs/verification/nebius-live-summary.json |
@@ -31,8 +32,8 @@ Terminal opened for hidden key entry and Windows-account-encrypted local storage
 received in chat or printed. The user then authorized up to $30 of existing Token
 Factory credits. This does not establish Nebius AI Cloud GPU quota.
 
-Still required: submission packaging and any preregistered larger confirmation
-study needed for a statistically supported recovery claim. Nebius AI Cloud execution remains
+Still required: final video recording/upload and Devpost submission by the authorized entrant.
+Nebius AI Cloud execution remains
 unavailable without a cloud project; real Token Factory inference is verified.
 
 No simulated performance numbers, fake trajectories, cloud completion or participant outcomes.

@@ -251,3 +251,16 @@ real simulator adapter, verified runtime readback, and stored one successful saf
 `3f3fd4bc92673f60b826a35bfdc17a4ddf63aa8acea2ede8702ffce8e0375b9c`.
 The redacted receipt is docs/verification/worker-e2e.json; runtime database and artifacts remain
 ignored local state.
+
+## Independent preregistered confirmation
+After the inconclusive eight-case pilot, Morph froze a distinct 40-case confirmation protocol in
+Git before execution. It used canonical starts 80..119, excluded every development and pilot case,
+kept the checkpoint, evaluator, condition and candidates unchanged, and named the conservative
+paired Hoeffding lower-bound rule in advance. The actuator-drift baseline achieved 15/40 with
+25 timeouts and 13 unsafe contacts. Nemotron's balanced_75 achieved 39/40 with one timeout and
+one unsafe contact. Its +0.60 paired gain has conservative interval [0.1705, 1.0], so it passes the
+frozen `simulation_candidate` rule. The matched random candidate also achieved 39/40, with zero
+unsafe contacts but a slower 8.05-second successful mean versus Morph's 6.68 seconds. This validates
+recovery, not Nemotron superiority over simple search. The protocol, audits and summary are under
+docs/verification/confirmation-*.json. The deterministic confirmation bundle SHA-256 is
+`30ad087c0ebad407da35e4aeba15a100e294806b5468d058166e8e91469817f4`.

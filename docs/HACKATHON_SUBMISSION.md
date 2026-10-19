@@ -23,12 +23,15 @@ simulation ran locally; no Nebius AI Cloud execution is claimed.
 
 ## Measured result
 - Nominal trained policy: 8/8 successes, zero unsafe contacts.
-- Frozen actuator-drift failure: development 3/8; held-out 4/8 with two unsafe contacts.
-- Nemotron-selected balanced-0.75: held-out 8/8, zero unsafe contacts, 6.56 s mean completion.
-- Matched random candidate: held-out 8/8, one unsafe contact, 8.05 s mean completion.
-- Paired point gain over the fault baseline: +50 percentage points for both candidates.
-- The preregistered n=8 conservative interval crosses zero. Morph reports the result as inconclusive
-  and does not claim statistically validated superiority.
+- Frozen actuator-drift failure: development 3/8; pilot held-out 4/8.
+- An independent 40-case confirmation was frozen in Git before execution on new starts 80..119.
+- Confirmation fault baseline: 15/40 successes and 13 unsafe contacts.
+- Nemotron-selected balanced-0.75: 39/40, one unsafe contact, 6.68 s mean completion.
+- Matched random candidate: 39/40, zero unsafe contacts, 8.05 s mean completion.
+- Both candidates achieved a +60 percentage-point paired gain. Morph's conservative 95% interval
+  was [0.171, 1.0], passing the preregistered simulation-recovery gate without physical approval.
+- Random matched success and was safer, while Nemotron's candidate was 1.36 s faster on successful
+  episodes. Morph therefore claims recovery validation, not superiority over simple search.
 
 ## Technical stack
 Python 3.11, FastAPI, Pydantic, SQLite, React, TypeScript, Vite, NVIDIA Nemotron 3 Super through Nebius
@@ -46,8 +49,8 @@ Ruff, mypy, coverage, package builds, dependency audit, and the React production
 ## Repository and evidence
 - Repository: https://github.com/hash066/Morph
 - Frozen protocol: `docs/verification/frozen-protocol.json`
-- Held-out summary: `docs/verification/heldout-summary.json`
-- Evidence build: `uv run python scripts/build_real_evidence.py`
+- Confirmation summary: `docs/verification/confirmation-summary.json`
+- Evidence build: `uv run python scripts/build_confirmation_evidence.py`
 - Demo script: `docs/DEMO_RUNBOOK.md`
 
 ## Required submission actions not performed by automation
