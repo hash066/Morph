@@ -13,6 +13,7 @@ the full recovery product and first live gate are not complete.
 | Paired comparison/development selection | IMPLEMENTED / UNIT TESTED | src/morph/evaluation.py, protocol.py |
 | Authenticated API | IMPLEMENTED / LOCALLY TESTED; launch gate closed | src/morph/api.py |
 | Package verification | PASS: 41 tests; mypy and Ruff pass; prior measured coverage 86.77% | docs/verification/ |
+| GitHub CI | PASS: Python core, 91.74% scoped unit coverage, package build, and React production build on commit 8ea0365 | https://github.com/hash066/Morph/actions |
 | Local simulator installation | PASS: 157 packages installed; 100-step smoke passed | docs/verification/simulator-install-local-temp.log |
 | Baseline/recovery simulation | PASS: official 800-iteration seed-42 PPO training completed; final model-799 nominal audit passed 8/8 with no aborts, timeouts, or unsafe rack contacts | docs/verification/baseline-model799-audit.json |
 | Perturbation and development recovery | PASS: 1.5x actuator drift reproduced 3/8 failure; controller compensation, Nemotron balanced-75, and matched random candidate each passed 8/8 development starts | docs/verification/frozen-protocol.json |
