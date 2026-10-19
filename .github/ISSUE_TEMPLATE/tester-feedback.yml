@@ -1,0 +1,40 @@
+name: Tester feedback
+description: Report a Morph workflow issue without credentials or confidential data
+title: "[Tester] "
+labels: ["tester-feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: "Do not include API keys, personal data, or confidential robot logs."
+  - type: dropdown
+    id: role
+    attributes:
+      label: Reviewer role
+      options: [Robotics engineer, Controls or automation engineer, Lab or manufacturing operator, Engineering manager or buyer]
+    validations:
+      required: true
+  - type: textarea
+    id: task
+    attributes:
+      label: What were you trying to understand or complete?
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: dropdown
+    id: interpretation
+    attributes:
+      label: Could you distinguish simulation evidence from physical approval?
+      options: [Yes, Partly, No]
+    validations:
+      required: true
+  - type: textarea
+    id: improvement
+    attributes:
+      label: What single change would make Morph more useful or trustworthy?
+    validations:
+      required: true

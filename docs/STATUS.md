@@ -14,7 +14,7 @@ the full recovery product and first live gate are not complete.
 | Authenticated API | IMPLEMENTED / LOCALLY TESTED: real evidence endpoints and frozen-stack development job admission | src/morph/api.py |
 | Restartable experiment worker | LIVE LOCAL VERIFIED: authenticated API accepted a frozen-stack job; durable worker ran the real simulator, validated and stored one successful safe episode plus content-addressed artifact in 106.97s | docs/verification/worker-e2e.json |
 | Package verification | PASS: 43 tests; mypy and Ruff pass; scoped deterministic-core coverage 91.74% | docs/verification/ |
-| GitHub CI | PASS: Python core, coverage gate, package build, and React production build on commit ed8b89d | https://github.com/hash066/Morph/actions |
+| GitHub CI | PASS: Python core, coverage gate, package build, and React production build on commit 7306aa8 | https://github.com/hash066/Morph/actions |
 | Local simulator installation | PASS: 157 packages installed; 100-step smoke passed | docs/verification/simulator-install-local-temp.log |
 | Baseline/recovery simulation | PASS: official 800-iteration seed-42 PPO training completed; final model-799 nominal audit passed 8/8 with no aborts, timeouts, or unsafe rack contacts | docs/verification/baseline-model799-audit.json |
 | Perturbation and development recovery | PASS: 1.5x actuator drift reproduced 3/8 failure; controller compensation, Nemotron balanced-75, and matched random candidate each passed 8/8 development starts | docs/verification/frozen-protocol.json |
@@ -26,7 +26,7 @@ the full recovery product and first live gate are not complete.
 | Live Nemotron inference | PASS: operator authorized $30 maximum; internal ledger capped at $1; 6 measured calls cost $0.00288942 total; real evidence-driven experiment selected | docs/verification/nebius-live-summary.json |
 | React workbench/browser evidence | IMPLEMENTED / BROWSER TESTED: authenticated investigation, experiment comparison, and evidence views load real API evidence; responsive navigation verified | web/, docs/verification/heldout-summary.json |
 | Hardware | DISABLED: no supervised approved setup | no motion adapter exists |
-| Usability/buyer evidence | NOT PERFORMED; blank protocol ready | docs/STUDY_PROTOCOL.md |
+| Usability/buyer evidence | NOT PERFORMED; concrete tester guide, consent boundaries, tasks, outreach copy, and issue form ready | docs/TESTER_GUIDE.md |
 
 Terminal opened for hidden key entry and Windows-account-encrypted local storage. No key was
 received in chat or printed. The user then authorized up to $30 of existing Token
