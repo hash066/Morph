@@ -12,6 +12,7 @@ from fastapi.responses import Response
 from morph.contracts import Budget, RecoveryPackage, RunManifest, RunResult
 from morph.evidence import export_bundle
 from morph.store import Conflict, Store
+from morph.worker import ExecutionRejected, validate_execution_manifest
 
 ROOT = Path(__file__).resolve().parents[2]
 VERIFICATION = ROOT / "docs" / "verification"
@@ -22,7 +23,7 @@ def create_app(store: Store | None = None, token: str | None = None) -> FastAPI:
     if len(access_token) < 32:
         raise RuntimeError("Set MORPH_API_TOKEN to a random secret of at least 32 characters")
     database = store or Store(
-        Path("data/morph.sqlite"), Budget(rollouts=100, wall_seconds=3600, gpu_hours=0, cost_usd=0)
+        Path("data/morph.sqlite"), Budget(rollouts=100, wall_seconds=86400, gpu_hours=24, cost_usd=0)
     )
 
     def authorize(authorization: Annotated[str | None, Header()] = None):
@@ -73,8 +74,12 @@ def create_app(store: Store | None = None, token: str | None = None) -> FastAPI:
 
     @app.post("/api/v1/runs", status_code=201)
     def submit(manifest: RunManifest):
-        # Deliberate gate: source inspection alone cannot authorize candidate execution.
-        raise HTTPException(409, "Simulator baseline and candidate sensitivity gate not verified")
+        try:
+            validate_execution_manifest(manifest, ROOT)
+            key = database.submit(manifest)
+        except (ExecutionRejected, Conflict) as exc:
+            raise HTTPException(409, str(exc)) from None
+        return {"id": key, "state": database.get(key)["state"]}
 
     def lookup(run_id: str):
         try:

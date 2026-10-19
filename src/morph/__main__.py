@@ -6,24 +6,36 @@ from pathlib import Path
 from morph.contracts import Budget
 from morph.planner import CreditAuthorization, Nemotron, ProviderBlocked
 from morph.store import Store
+from morph.worker import LocalSimulatorWorker
+
+ROOT = Path(__file__).resolve().parents[2]
 
 
 def main():
     parser = argparse.ArgumentParser(description="Morph feasibility and evidence tools")
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("status")
+    commands.add_parser("worker-once", help="Execute at most one queued, provenance-validated job")
     provider = commands.add_parser("provider-check", help="Read-only account model availability check")
     provider.add_argument("--authorization", type=Path, required=True)
     args = parser.parse_args()
+    if args.command == "worker-once":
+        store = Store(
+            ROOT / "data/morph.sqlite",
+            Budget(rollouts=100, wall_seconds=86400, gpu_hours=24, cost_usd=0),
+        )
+        key = LocalSimulatorWorker(store, ROOT).run_one()
+        print(json.dumps({"processed": key}))
+        return
     if args.command == "status":
         print(
             json.dumps(
                 {
-                    "simulation": "blocked",
+                    "simulation": "evaluated",
                     "hardware": "disabled",
                     "nebius_key_present": bool(os.environ.get("NEBIUS_API_KEY", "").strip()),
-                    "credit_verified": False,
-                    "performance_results": 0,
+                    "token_factory_verified": (ROOT / "docs/verification/nebius-recovery-selection.json").is_file(),
+                    "held_out_results": 3,
                 },
                 indent=2,
             )

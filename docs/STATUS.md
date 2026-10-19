@@ -11,7 +11,8 @@ the full recovery product and first live gate are not complete.
 | Durable budget/queue/artifact store | IMPLEMENTED / LOCALLY TESTED | src/morph/store.py |
 | Nemotron HTTP adapter | LIVE VERIFIED: strict Super-model proposal validated; failures retained | docs/verification/nebius-live-planner.json |
 | Paired comparison/development selection | IMPLEMENTED / UNIT TESTED | src/morph/evaluation.py, protocol.py |
-| Authenticated API | IMPLEMENTED / LOCALLY TESTED; launch gate closed | src/morph/api.py |
+| Authenticated API | IMPLEMENTED / LOCALLY TESTED: real evidence endpoints and frozen-stack development job admission | src/morph/api.py |
+| Restartable experiment worker | LIVE LOCAL VERIFIED: authenticated API accepted a frozen-stack job; durable worker ran the real simulator, validated and stored one successful safe episode plus content-addressed artifact in 106.97s | docs/verification/worker-e2e.json |
 | Package verification | PASS: 41 tests; mypy and Ruff pass; prior measured coverage 86.77% | docs/verification/ |
 | GitHub CI | PASS: Python core, 91.74% scoped unit coverage, package build, and React production build on commit 8ea0365 | https://github.com/hash066/Morph/actions |
 | Local simulator installation | PASS: 157 packages installed; 100-step smoke passed | docs/verification/simulator-install-local-temp.log |
@@ -30,8 +31,7 @@ Terminal opened for hidden key entry and Windows-account-encrypted local storage
 received in chat or printed. The user then authorized up to $30 of existing Token
 Factory credits. This does not establish Nebius AI Cloud GPU quota.
 
-Still required: real worker execution/cancellation, complete investigation loop, React
-workbench/replays/browser evidence, submission packaging, and any preregistered larger confirmation
+Still required: submission packaging and any preregistered larger confirmation
 study needed for a statistically supported recovery claim. Nebius AI Cloud execution remains
 unavailable without a cloud project; real Token Factory inference is verified.
 

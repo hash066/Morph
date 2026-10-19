@@ -1,0 +1,11 @@
+{
+  "format": "morph-worker-e2e-v1",
+  "job_id": "2778e42651622c29e0f9ae1c5f3fab2135843e3d36a7a2d0ad7cece06381dedd",
+  "state": "succeeded",
+  "manifest_sha256": "2778e42651622c29e0f9ae1c5f3fab2135843e3d36a7a2d0ad7cece06381dedd",
+  "episodes": 1,
+  "successes": 1,
+  "unsafe": 0,
+  "wall_seconds": 106.96900000004098,
+  "artifact_sha256": "3f3fd4bc92673f60b826a35bfdc17a4ddf63aa8acea2ede8702ffce8e0375b9c"
+}

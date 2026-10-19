@@ -26,8 +26,17 @@ uv run uvicorn morph.api:create_app --factory --host 127.0.0.1 --port 8091
 
 API requests require `Authorization: Bearer <MORPH_API_TOKEN>`. OpenAPI is at /docs.
 Default storage is data/morph.sqlite; no secrets or runtime data are tracked. Jobs submitted
-through the API currently receive a truthful 409 until simulation feasibility is verified.
-No automatic GPU provisioning, training, model call or hardware motion occurs on startup.
+through the API must match the frozen checkpoint, evaluator, lock, development split, private
+condition reference and bounded candidate schema. Process one queued job explicitly with:
+
+```powershell
+uv run python -m morph worker-once
+```
+
+The restartable worker claims at most one job, runs the constrained simulator adapter, validates
+readback, stores content-addressed episode evidence, and records success or a redacted failure.
+Queued cancellation prevents execution; a cancelled running job cannot publish a result. No
+automatic GPU provisioning, training, model call or hardware motion occurs on startup.
 Run the React workbench in a second terminal:
 
 ```powershell

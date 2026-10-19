@@ -240,3 +240,14 @@ inconclusive decision, and evidence bundle digest. Responsive navigation was cor
 retested at the available compact browser viewport. `npm run build` passed with 1,920 modules
 transformed and no dependency audit findings. No prerecorded run is labeled live, and the UI
 keeps physical motion disabled.
+
+## API-to-worker end-to-end simulator execution
+An authenticated API POST admitted one bounded development manifest only after matching the
+frozen checkpoint, evaluator and lock hashes, private condition reference, development rows,
+and candidate bounds. The durable worker claimed job
+`2778e42651622c29e0f9ae1c5f3fab2135843e3d36a7a2d0ad7cece06381dedd`, launched the constrained
+real simulator adapter, verified runtime readback, and stored one successful safe episode in
+106.969 seconds. Its raw episode artifact is content-addressed by
+`3f3fd4bc92673f60b826a35bfdc17a4ddf63aa8acea2ede8702ffce8e0375b9c`.
+The redacted receipt is docs/verification/worker-e2e.json; runtime database and artifacts remain
+ignored local state.
