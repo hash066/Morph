@@ -1,19 +1,20 @@
 # Demo runbook
 
-Current truthful demo: run local tests, inspect API status/empty queue, inspect pinned stack and
-blocked gates. This is engineering progress, NOT the hackathon recovery demo. Do not insert
-test fixture outcomes, invented videos or numerical gains into a submission.
+Current truthful demo uses the completed frozen simulation evidence and browser-tested workbench.
+Do not describe the n=8 point gain as statistically validated, imply that local simulation ran on
+Nebius Cloud, or insert invented videos, participant outcomes, or physical trials.
 
-Once feasibility gates pass, record 2m50s:
-0:00 task/changed condition; 0:20 baseline failure; 0:45–1:45 operating investigation, queue,
-replay and evaluator modules; 1:45 paired results/refusal; 2:15 participant reproduction or actual
-supervised hardware if performed; 2:35 measured outcome and customer problem.
+Record 2m50s:
+0:00 task and 1.5x calibration drift; 0:20 show the frozen 4/8 held-out fault baseline;
+0:45–1:45 operate Investigation, Experiments, and Evidence modules; 1:45 show the real Nemotron
+selection and matched-random comparison; 2:15 export and verify the evidence package; 2:35 explain
+the +50-point result, safety difference, and why the conservative n=8 interval remains inconclusive.
 Label simulation/replay/physical footage and time compression. Include failed runs and n/N.
 
-Before recording: confirm pinned checkpoint/evaluator, all scheduled cases accounted for,
-equal search budgets with inference overhead, no held-out tuning, verified actual Nebius trace,
-Nemotron call receipt, permitted asset licenses and recording consent. If random search wins,
-show that result. Do not replace it with an unmeasured operator-time claim.
+Before recording: confirm model-799 and evaluator hashes, all 8 frozen held-out cases per method,
+the Git-frozen protocol, real Token Factory trace and Nemotron receipt, bundle checksum, permitted
+asset licenses, and recording consent. State that random matched success but had one unsafe contact
+and was slower; do not convert this small comparison into a general superiority claim.
 
 Rules checked 19 October: https://nebiusglobalaihackathon.devpost.com/rules
 Under three minutes; at least one minute of operating modules for a no-hardware Physical AI
