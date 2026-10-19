@@ -1,0 +1,39 @@
+{
+  "format": "morph-held-out-summary-v1",
+  "morph_report": {
+    "baseline_manifest": "5c8a358a27ec482891cd1e4fe31c27723b52bfb121c1ac5c6a0907bdadf88c63",
+    "candidate_manifest": "9a136c760ce9ccb9d75457eca092d7d02e466f509ce6235d7df2b361a267842b",
+    "denominator": 8,
+    "baseline_successes": 4,
+    "candidate_successes": 8,
+    "paired_gain": 0.5,
+    "paired_gain_interval95": [
+      -0.4603227913199207,
+      1.0
+    ],
+    "decision": "no_validated_recovery",
+    "reason": "No statistically supported paired gain without increased safety failures.",
+    "total_wall_seconds": 238.166451,
+    "total_gpu_hours": 0.0661573475,
+    "total_cost_usd": 0.0
+  },
+  "random_report": {
+    "baseline_manifest": "5c8a358a27ec482891cd1e4fe31c27723b52bfb121c1ac5c6a0907bdadf88c63",
+    "candidate_manifest": "6f08f2905cc8197766d0179c97e24ebee7fd8672a2232867a5eb35c83a732806",
+    "denominator": 8,
+    "baseline_successes": 4,
+    "candidate_successes": 8,
+    "paired_gain": 0.5,
+    "paired_gain_interval95": [
+      -0.4603227913199207,
+      1.0
+    ],
+    "decision": "no_validated_recovery",
+    "reason": "No statistically supported paired gain without increased safety failures.",
+    "total_wall_seconds": 253.847261,
+    "total_gpu_hours": 0.07051312805555555,
+    "total_cost_usd": 0.0
+  },
+  "bundle_sha256": "0057dd29396bbd430c6aeffa21f77fac808cd19bca2d10e07ddc0551c3d7a0f1",
+  "bundle_bytes": 22800
+}

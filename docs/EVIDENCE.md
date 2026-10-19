@@ -219,3 +219,15 @@ mean completion time. A deterministic random-seed-42 selection, arm67_jaw80, als
 evaluation. The evaluator hash, development starts, held-out starts 64..71, condition,
 candidate selections, and one-shot policy were frozen before held-out execution in
 docs/verification/frozen-protocol.json.
+
+## Frozen held-out result and evidence export
+The one-shot held-out runs used canonical starts 64..71 exactly as frozen. Under the actuator
+fault, the unchanged controller achieved 4/8 successes, four timeouts, and two unsafe rack
+contacts. Nemotron's balanced_75 candidate achieved 8/8 with zero unsafe contacts and 6.56
+seconds mean completion time. The matched random arm67_jaw80 candidate also achieved 8/8,
+but had one unsafe contact and 8.05 seconds mean completion time. Both candidates have a
++0.50 paired point gain over the fault baseline. With only eight held-out starts, the frozen
+conservative interval is [-0.4603, 1.0], so Morph reports `no_validated_recovery` and does not
+claim statistical superiority. The deterministic evidence bundle is
+dist/morph-evidence-v1.zip; its SHA-256 and both reports are recorded in
+docs/verification/heldout-summary.json.

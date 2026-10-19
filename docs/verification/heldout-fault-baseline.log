@@ -1,0 +1,206 @@
+STDOUT
+[INFO]: Parsing configuration from: isaaclab_tutorial.tasks.place_vial.config.so101.env_cfg:SO101VialEnvCfg
+[INFO]: Parsing configuration from: isaaclab_tutorial.tasks.place_vial.config.so101.agents.rsl_rl_ppo_cfg:SO101StatePPORunnerCfg
+
+╭─ Isaac Lab · play ─────────────────────────────╮      [0m         [0m[38;2;118;185;0m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄[0m
+│ Task          IsaacTutorial-Place-Vial-SO101   │      [0m      [0m[38;2;118;185;0m▄▄▄▛▀[0m[38;2;118;185;0m[48;2;118;185;0m             [0m
+│ Workflow      manager-based                    │      [0m  [0m[38;2;118;185;0m▗▄[0m[38;2;118;185;0m[48;2;118;185;0m  [0m[38;2;118;185;0m▀▀▜[0m[38;2;118;185;0m[48;2;118;185;0m   [0m[38;2;118;185;0m▄▄▀▜[0m[38;2;118;185;0m[48;2;118;185;0m        [0m
+│ RL library    rsl_rl                           │      [0m[38;2;118;185;0m▄[0m[38;2;118;185;0m[48;2;118;185;0m  [0m[38;2;118;185;0m▀▚▄[0m[38;2;118;185;0m[48;2;118;185;0m  [0m[38;2;118;185;0m▀▙▖[0m [0m[38;2;118;185;0m▀[0m[38;2;118;185;0m[48;2;118;185;0m  [0m[38;2;118;185;0m▄[0m [0m[38;2;118;185;0m▀[0m[38;2;118;185;0m[48;2;118;185;0m      [0m
+│ Physics       newton_mjwarp                    │      [0m[38;2;118;185;0m▝[0m[38;2;118;185;0m[48;2;118;185;0m  [0m[38;2;118;185;0m▖▝[0m[38;2;118;185;0m[48;2;118;185;0m [0m[38;2;118;185;0m▙[0m  [0m[38;2;118;185;0m[48;2;118;185;0m  [0m[38;2;118;185;0m▙▟[0m[38;2;118;185;0m[48;2;118;185;0m [0m[38;2;118;185;0m▛▘▄[0m[38;2;118;185;0m[48;2;118;185;0m       [0m
+│ Renderer      n/a (no camera sensors)          │      [0m [0m[38;2;118;185;0m▝[0m[38;2;118;185;0m[48;2;118;185;0m  [0m[38;2;118;185;0m▄▝▜[0m[38;2;118;185;0m[48;2;118;185;0m [0m[38;2;118;185;0m▄[0m[38;2;118;185;0m[48;2;118;185;0m  [0m[38;2;118;185;0m▛▀▚▄[0m[38;2;118;185;0m[48;2;118;185;0m  [0m[38;2;118;185;0m▛▘[0m [0m[38;2;118;185;0m▝▜[0m[38;2;118;185;0m[48;2;118;185;0m  [0m
+│ Visualizer    none (headless)                  │      [0m   [0m[38;2;118;185;0m▀[0m[38;2;118;185;0m[48;2;118;185;0m  [0m[38;2;118;185;0m▄▄[0m[38;2;118;185;0m[48;2;118;185;0m     [0m[38;2;118;185;0m▛▀▀▗▄▄▟[0m[38;2;118;185;0m[48;2;118;185;0m    [0m
+│ Device        cuda:0                           │      [0m      [0m[38;2;118;185;0m▀▀▀▙▄▄▄▟[0m[38;2;118;185;0m[48;2;118;185;0m          [0m
+│ Environments  8                                │      [0m         [0m[38;2;118;185;0m▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[0m
+╰────────────────────────────────────────────────╯
+
+[1/3] Launching simulation
+[INFO] Loading experiment from directory: E:\Winter\Morph\vendor\IsaacLabTutorial\logs\rsl_rl\so101_vial_state
+[2/3] Creating environment
+[INFO]: Base environment:
+	Environment device    : cuda:0
+	Environment seed      : 42
+	Physics step-size     : 0.008333333333333333
+	Rendering step-size   : 0.03333333333333333
+	Environment step-size : 0.03333333333333333
+[INFO]: Time taken for scene creation Last: 19.458606 s, Mean: 19.458606 s, Std: 0.000000 s, N: 1
+[INFO]: Scene manager:  <class InteractiveScene>
+	Number of environments: 8
+	Environment spacing   : 0.9
+	Source prim name      : /World/envs/env_0
+	Global prim paths     : []
+	Replicate physics     : True
+Finalize builder took: Last: 0.674948 s, Mean: 0.674948 s, Std: 0.000000 s, N: 1
+Contact sensor construction took: Last: 0.124569 s, Mean: 0.124569 s, Std: 0.000000 s, N: 1
+Contact sensor construction took: Last: 0.003557 s, Mean: 0.064063 s, Std: 0.085568 s, N: 2
+Contact sensor construction took: Last: 0.004817 s, Mean: 0.044315 s, Std: 0.069506 s, N: 3
+Initialize solver took: Last: 8.933412 s, Mean: 8.933412 s, Std: 0.000000 s, N: 1
+[INFO]: Time taken for simulation start Last: 12.840057 s, Mean: 12.840057 s, Std: 0.000000 s, N: 1
+[INFO] Command Manager:  <CommandManager> contains 0 active terms.
++----------------------+
+| Active Command Terms |
++-------+------+-------+
+| Index | Name |  Type |
++-------+------+-------+
++-------+------+-------+
+
+[INFO] Event Manager:  <EventManager> contains 2 active terms.
++---------------------------------------+
+| Active Event Terms in Mode: 'startup' |
++-----------+---------------------------+
+|   Index   | Name                      |
++-----------+---------------------------+
+|     0     | vial_material             |
+|     1     | vial_mass                 |
++-----------+---------------------------+
++-------------------------------------+
+| Active Event Terms in Mode: 'reset' |
++--------+----------------------------+
+| Index  | Name                       |
++--------+----------------------------+
+|   0    | reset_from_dataset         |
++--------+----------------------------+
+
+[INFO] Recorder Manager:  <RecorderManager> contains 0 active terms.
++-----------------------+
+| Active Recorder Terms |
++------------+----------+
+|   Index    | Name     |
++------------+----------+
++------------+----------+
+
+[INFO] Action Manager:  <ActionManager> contains 2 active terms.
++------------------------------------+
+|   Active Action Terms (shape: 6)   |
++-------+----------------+-----------+
+| Index | Name           | Dimension |
++-------+----------------+-----------+
+|   0   | arm_action     |         5 |
+|   1   | gripper_action |         1 |
++-------+----------------+-----------+
+
+[INFO] Observation Manager: <ObservationManager> contains 2 groups.
++------------------------------------------------------------+
+| Active Observation Terms in Group: 'policy' (shape: (60,)) |
++------------+---------------------------------+-------------+
+|   Index    | Name                            |    Shape    |
++------------+---------------------------------+-------------+
+|     0      | joint_pos                       |     (6,)    |
+|     1      | joint_vel                       |     (6,)    |
+|     2      | joint_target                    |     (6,)    |
+|     3      | previous_action                 |     (6,)    |
+|     4      | end_effector                    |    (13,)    |
+|     5      | vial                            |    (13,)    |
+|     6      | vial_in_rack                    |     (3,)    |
+|     7      | placement                       |     (4,)    |
+|     8      | progress                        |     (3,)    |
++------------+---------------------------------+-------------+
++------------------------------------------------------------+
+| Active Observation Terms in Group: 'critic' (shape: (63,)) |
++------------+---------------------------------+-------------+
+|   Index    | Name                            |    Shape    |
++------------+---------------------------------+-------------+
+|     0      | joint_pos                       |     (6,)    |
+|     1      | joint_vel                       |     (6,)    |
+|     2      | joint_target                    |     (6,)    |
+|     3      | previous_action                 |     (6,)    |
+|     4      | end_effector                    |    (13,)    |
+|     5      | vial                            |    (13,)    |
+|     6      | vial_in_rack                    |     (3,)    |
+|     7      | placement                       |     (4,)    |
+|     8      | progress                        |     (3,)    |
+|     9      | contact                         |     (3,)    |
++------------+---------------------------------+-------------+
+
+[INFO] Termination Manager:  <TerminationManager> contains 5 active terms.
++---------------------------------------+
+|        Active Termination Terms       |
++-------+--------------------+----------+
+| Index | Name               | Time Out |
++-------+--------------------+----------+
+|   0   | success            |  False   |
+|   1   | vial_dropped       |  False   |
+|   2   | vial_out_of_bounds |  False   |
+|   3   | unstable_robot     |  False   |
+|   4   | time_out           |   True   |
++-------+--------------------+----------+
+
+[INFO] Reward Manager:  <RewardManager> contains 8 active terms.
++-------------------------------------+
+|         Active Reward Terms         |
++-------+-------------------+---------+
+| Index | Name              |  Weight |
++-------+-------------------+---------+
+|   0   | approach_progress |     1.0 |
+|   1   | held_goal         |     0.1 |
+|   2   | milestones        |    10.0 |
+|   3   | success           |   200.0 |
+|   4   | vial_lost         |   -50.0 |
+|   5   | action_rate       |  -0.002 |
+|   6   | joint_velocity    | -0.0002 |
+|   7   | joint_limits      |    -1.0 |
++-------+-------------------+---------+
+
+[INFO] Curriculum Manager:  <CurriculumManager> contains 0 active terms.
++-------------------------+
+| Active Curriculum Terms |
++-------------+-----------+
+|    Index    | Name      |
++-------------+-----------+
++-------------+-----------+
+
+[INFO]: Completed setting up the environment...
+[3/3] Loading policy
+[INFO]: Loading model checkpoint from: E:\Winter\Morph\vendor\IsaacLabTutorial\logs\rsl_rl\so101_vial_state\2026-10-19_10-15-22_morph_baseline_seed42\model_799.pt
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['policy']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=60, out_features=256, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=6, bias=True)
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=63, out_features=256, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+[INFO] Policy playback is running, press Ctrl+C to exit...
+CUDA graph took: Last: 1.011770 s, Mean: 1.011770 s, Std: 0.000000 s, N: 1
+MORPH_EVAL_RESULT={"aborts": 0, "episodes": 8, "successes": 4, "timeouts": 4, "unsafe_rack_contacts": 2}
+
+STDERR
+warning: `VIRTUAL_ENV=E:\Winter\Morph\.venv` does not match the project environment path `.venv` and will be ignored; use `--active` to target the active environment instead
+##################################################################
+#  PXR_WORK_THREAD_LIMIT is overridden to '1'.  Default is '0'.  #
+##################################################################
+I: Initializing Version 2.74.0-release.7316+gl.ec99a64b
+I: Client ID: 02B3BI3Y
+I: ThreadId(02) hub_client::client::Client::new Launching client mode=Shared with_cleaner=false cache_path=None cache_size=None
+I: ThreadId(03) launch self=Launcher { discovery_lock: RwLock { lock: RwLock { inner: File { handle: 0xb44, path: "\\\\?\\E:\\Winter\\Morph\\data\\sim-temp\\hub-Harshita.lock" } } }, mode: Shared, with_cleaner: false, config_file: "E:\\Winter\\Morph\\data\\sim-temp\\hub-Harshita-59D04A28.config.json" } cmd="hub.exe" "--mode=shared" "--write-config" "E:\\Winter\\Morph\\data\\sim-temp\\hub-Harshita-59D04A28.config.json" "--"
+I: Not using Hub: Hub not found
+I: Successfully created S3 provider for https://omniverse-content-production.s3-us-west-2.amazonaws.com
+I: Using CloudFront http://dcb18d6mfegct.cloudfront.net/, List = No
+Serving remote assets from the local cache under 'E:\Winter\Morph\data\sim-temp'. Each copy is checked against the server before use; delete the directory to force a full re-download.
+E:\Winter\Morph\vendor\IsaacLabTutorial\.venv\Lib\site-packages\isaaclab_newton\cloner\newton_clone_utils.py:165: FutureWarning: Newton shape color replacement is enabled; this workaround will be deprecated in a future release.
+  replace_newton_builder_shape_colors(builder, stage)
+Failed to get root com velocity. If the articulation is fixed, this is expected. Setting root com velocity to zeros.
+W1019 22:12:56.762000 60172 Lib\site-packages\torch\utils\flop_counter.py:29] triton not found; flop counting will not work for triton kernels
+C:\Users\asus\AppData\Local\Programs\Python\Python312\Lib\copyreg.py:99: FutureWarning: `isinstance(treespec, LeafSpec)` is deprecated, use `isinstance(treespec, TreeSpec) and treespec.is_leaf()` instead.
+  return cls.__new__(cls, *args)

@@ -1,0 +1,207 @@
+{
+  "format": "morph-so101-audit-v1",
+  "summary": {
+    "episodes": 8,
+    "successes": 4,
+    "aborts": 0,
+    "timeouts": 4,
+    "unsafe_rack_contacts": 2
+  },
+  "argv": [
+    "play",
+    "--rl_library",
+    "rsl_rl",
+    "--task",
+    "IsaacTutorial-Place-Vial-SO101",
+    "--num_envs",
+    "8",
+    "--checkpoint",
+    "E:\\Winter\\Morph\\vendor\\IsaacLabTutorial\\logs\\rsl_rl\\so101_vial_state\\2026-10-19_10-15-22_morph_baseline_seed42\\model_799.pt",
+    "--visualizer",
+    "none",
+    "--external_callback",
+    "morph.isaac_callback.install_morph_episode_counter",
+    "presets=newton_mjwarp",
+    "env.seed=42",
+    "env.events.vial_mass.params.mass_distribution_params=[0.02,0.02]",
+    "env.events.vial_material.params.static_friction_range=[0.7,0.7]",
+    "env.events.vial_material.params.dynamic_friction_range=[0.7,0.7]",
+    "env.actions.arm_action.scale=0.0495",
+    "env.actions.gripper_action.scale=0.03"
+  ],
+  "runtime": {
+    "success_criterion": "any_rack_hole_v1",
+    "first_step_utc": "2026-10-19T16:43:03.481196+00:00",
+    "episode_length_s": 20.0,
+    "event_parameters": {
+      "vial_material": {
+        "static_friction_range": [
+          0.7,
+          0.7
+        ],
+        "dynamic_friction_range": [
+          0.7,
+          0.7
+        ],
+        "restitution_range": [
+          0.0,
+          0.0
+        ],
+        "num_buckets": 32
+      },
+      "vial_mass": {
+        "mass_distribution_params": [
+          0.02,
+          0.02
+        ],
+        "operation": "abs"
+      },
+      "reset_from_dataset": {
+        "dataset_path": "E:\\Winter\\Morph\\vendor\\IsaacLabTutorial\\src\\isaaclab_tutorial\\assets\\reset_poses.pt",
+        "sequential": true,
+        "phase_weights": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "action_parameters": {
+      "arm_action": {
+        "scale": 0.0495,
+        "joint_names": [
+          "shoulder_pan",
+          "shoulder_lift",
+          "elbow_flex",
+          "wrist_flex",
+          "wrist_roll"
+        ]
+      },
+      "gripper_action": {
+        "scale": 0.03,
+        "joint_names": [
+          "gripper"
+        ]
+      }
+    }
+  },
+  "checkpoint_sha256": "5ec3622d81ed3f9210c3da8aa2cf1b70a661f6b13998de396fda4ccf324ec10d",
+  "reset_offset": 64,
+  "started_at": "2026-10-19T16:41:49.177926+00:00",
+  "finished_at": "2026-10-19T16:44:30.612791+00:00",
+  "episodes": [
+    {
+      "env_id": 0,
+      "reset_row": 64,
+      "success": true,
+      "aborted": false,
+      "timed_out": false,
+      "unsafe_rack_contact": false,
+      "grasped": true,
+      "lifted": true,
+      "inserted": true,
+      "completion_seconds": 10.966667175292969,
+      "peak_rack_force_n": 16.730350494384766,
+      "hole_index": 0
+    },
+    {
+      "env_id": 1,
+      "reset_row": 65,
+      "success": false,
+      "aborted": false,
+      "timed_out": true,
+      "unsafe_rack_contact": false,
+      "grasped": true,
+      "lifted": true,
+      "inserted": false,
+      "completion_seconds": null,
+      "peak_rack_force_n": 10.834630966186523
+    },
+    {
+      "env_id": 2,
+      "reset_row": 66,
+      "success": true,
+      "aborted": false,
+      "timed_out": false,
+      "unsafe_rack_contact": false,
+      "grasped": true,
+      "lifted": true,
+      "inserted": true,
+      "completion_seconds": 5.533333778381348,
+      "peak_rack_force_n": 7.004594326019287,
+      "hole_index": 0
+    },
+    {
+      "env_id": 3,
+      "reset_row": 67,
+      "success": false,
+      "aborted": false,
+      "timed_out": true,
+      "unsafe_rack_contact": false,
+      "grasped": true,
+      "lifted": false,
+      "inserted": false,
+      "completion_seconds": null,
+      "peak_rack_force_n": 10.137943267822266
+    },
+    {
+      "env_id": 4,
+      "reset_row": 68,
+      "success": true,
+      "aborted": false,
+      "timed_out": false,
+      "unsafe_rack_contact": false,
+      "grasped": true,
+      "lifted": true,
+      "inserted": true,
+      "completion_seconds": 4.733333587646484,
+      "peak_rack_force_n": 6.744033336639404,
+      "hole_index": 0
+    },
+    {
+      "env_id": 5,
+      "reset_row": 69,
+      "success": false,
+      "aborted": false,
+      "timed_out": true,
+      "unsafe_rack_contact": false,
+      "grasped": false,
+      "lifted": false,
+      "inserted": false,
+      "completion_seconds": null,
+      "peak_rack_force_n": 0.0
+    },
+    {
+      "env_id": 6,
+      "reset_row": 70,
+      "success": true,
+      "aborted": false,
+      "timed_out": false,
+      "unsafe_rack_contact": true,
+      "grasped": true,
+      "lifted": true,
+      "inserted": true,
+      "completion_seconds": 8.600000381469727,
+      "peak_rack_force_n": 41.820064544677734,
+      "hole_index": 0
+    },
+    {
+      "env_id": 7,
+      "reset_row": 71,
+      "success": false,
+      "aborted": false,
+      "timed_out": true,
+      "unsafe_rack_contact": true,
+      "grasped": true,
+      "lifted": true,
+      "inserted": false,
+      "completion_seconds": null,
+      "peak_rack_force_n": 21.895431518554688
+    }
+  ]
+}
