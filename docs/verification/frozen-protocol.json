@@ -1,0 +1,38 @@
+{
+  "format": "morph-frozen-protocol-v1",
+  "frozen_at": "2026-10-19T15:41:22.6775484Z",
+  "checkpoint_sha256": "5ec3622d81ed3f9210c3da8aa2cf1b70a661f6b13998de396fda4ccf324ec10d",
+  "evaluator_sha256": "3386f2c82275b13a9205d1548a49fa7f4e493705df3d31728c0681b3248ad3b8",
+  "seed": 42,
+  "condition": {
+    "vial_mass_kg": 0.02,
+    "vial_friction_coeff": 0.7,
+    "actuator_gain_multiplier": 1.5
+  },
+  "development_start_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "held_out_start_ids": [
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71
+  ],
+  "development_candidates": {
+    "morph": "balanced_75",
+    "random": "arm67_jaw80",
+    "random_seed": 42
+  },
+  "held_out_policy": "evaluate each selected candidate once; do not tune from held-out outcomes"
+}

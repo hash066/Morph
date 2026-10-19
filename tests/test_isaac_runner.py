@@ -12,7 +12,9 @@ def request(tmp_path: Path, **changes):
     values = {
         "checkpoint": checkpoint,
         "output": tmp_path / "audit.json",
-        "perturbation": Perturbation(condition_id="heavy", vial_mass_kg=0.03, recoverable=True),
+        "perturbation": Perturbation(
+            condition_id="heavy", vial_mass_kg=0.03, recoverable=True, actuator_gain_multiplier=1.2
+        ),
         "candidate": Candidate(candidate_id="c75", arm_scale_multiplier=0.75, jaw_scale_multiplier=0.5),
         "episodes": 20,
         "seed": 42,
@@ -26,8 +28,10 @@ def test_command_is_fixed_and_bounded(tmp_path):
     command = build_command(request(tmp_path), tmp_path)
     assert command[:6] == ("uv", "run", "--locked", "--no-sync", "isaaclab", "play")
     assert "env.events.vial_mass.params.mass_distribution_params=[0.03,0.03]" in command
-    assert "env.actions.arm_action.scale=0.02475" in command
-    assert "env.actions.gripper_action.scale=0.01" in command
+    assert "env.events.vial_material.params.static_friction_range=[0.7,0.7]" in command
+    assert "env.events.vial_material.params.dynamic_friction_range=[0.7,0.7]" in command
+    assert "env.actions.arm_action.scale=0.0297" in command
+    assert "env.actions.gripper_action.scale=0.012" in command
     assert all("NEBIUS" not in part for part in command)
 
 

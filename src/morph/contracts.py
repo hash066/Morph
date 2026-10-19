@@ -38,6 +38,8 @@ class Perturbation(Frozen):
     condition_id: Identifier
     vial_mass_kg: Annotated[float, Field(gt=0, le=0.030)]
     recoverable: bool
+    vial_friction_coeff: Annotated[float, Field(ge=0.2, le=1.3)] = 0.7
+    actuator_gain_multiplier: Annotated[float, Field(ge=1.0, le=1.5)] = 1.0
 
 
 class Candidate(Frozen):

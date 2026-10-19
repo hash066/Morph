@@ -18,6 +18,10 @@ NOMINAL_JAW_SCALE = 0.02
 EVALUATOR = "morph.isaac_callback.install_morph_episode_counter"
 
 
+def _scaled(nominal: float, gain: float, candidate: float) -> float:
+    return float(f"{nominal * gain * candidate:.12g}")
+
+
 @dataclass(frozen=True)
 class AuditRequest:
     checkpoint: Path
@@ -54,9 +58,11 @@ def checkpoint_sha256(path: Path) -> str:
 
 def build_command(request: AuditRequest, tutorial: Path) -> tuple[str, ...]:
     request.validate()
-    arm_scale = NOMINAL_ARM_SCALE * request.candidate.arm_scale_multiplier
-    jaw_scale = NOMINAL_JAW_SCALE * request.candidate.jaw_scale_multiplier
+    gain = request.perturbation.actuator_gain_multiplier
+    arm_scale = _scaled(NOMINAL_ARM_SCALE, gain, request.candidate.arm_scale_multiplier)
+    jaw_scale = _scaled(NOMINAL_JAW_SCALE, gain, request.candidate.jaw_scale_multiplier)
     mass = request.perturbation.vial_mass_kg
+    friction = request.perturbation.vial_friction_coeff
     return (
         "uv", "run", "--locked", "--no-sync", "isaaclab", "play",
         "--rl_library", "rsl_rl",
@@ -68,6 +74,8 @@ def build_command(request: AuditRequest, tutorial: Path) -> tuple[str, ...]:
         "presets=newton_mjwarp",
         f"env.seed={request.seed}",
         f"env.events.vial_mass.params.mass_distribution_params=[{mass},{mass}]",
+        f"env.events.vial_material.params.static_friction_range=[{friction},{friction}]",
+        f"env.events.vial_material.params.dynamic_friction_range=[{friction},{friction}]",
         f"env.actions.arm_action.scale={arm_scale}",
         f"env.actions.gripper_action.scale={jaw_scale}",
     )
@@ -111,9 +119,16 @@ def _validate_readback(request: AuditRequest, payload: dict) -> None:
     expected_mass = [request.perturbation.vial_mass_kg] * 2
     if event.get("mass_distribution_params") != expected_mass:
         raise RuntimeError("vial-mass readback mismatch")
+    material = runtime.get("event_parameters", {}).get("vial_material", {})
+    expected_friction = [request.perturbation.vial_friction_coeff] * 2
+    if material.get("static_friction_range") != expected_friction:
+        raise RuntimeError("static-friction readback mismatch")
+    if material.get("dynamic_friction_range") != expected_friction:
+        raise RuntimeError("dynamic-friction readback mismatch")
     action = runtime.get("action_parameters", {})
-    expected_arm = NOMINAL_ARM_SCALE * request.candidate.arm_scale_multiplier
-    expected_jaw = NOMINAL_JAW_SCALE * request.candidate.jaw_scale_multiplier
+    gain = request.perturbation.actuator_gain_multiplier
+    expected_arm = _scaled(NOMINAL_ARM_SCALE, gain, request.candidate.arm_scale_multiplier)
+    expected_jaw = _scaled(NOMINAL_JAW_SCALE, gain, request.candidate.jaw_scale_multiplier)
     if action.get("arm_action", {}).get("scale") != expected_arm:
         raise RuntimeError("arm-scale readback mismatch")
     if action.get("gripper_action", {}).get("scale") != expected_jaw:

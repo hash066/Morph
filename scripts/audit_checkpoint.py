@@ -21,6 +21,8 @@ def main() -> None:
     parser.add_argument("--offset", type=int, default=0)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--mass", type=float, default=0.020)
+    parser.add_argument("--friction", type=float, default=0.7)
+    parser.add_argument("--actuator-gain", type=float, default=1.0)
     parser.add_argument("--arm", type=float, default=1.0)
     parser.add_argument("--jaw", type=float, default=1.0)
     parser.add_argument("--timeout", type=int, default=1200)
@@ -29,7 +31,13 @@ def main() -> None:
         AuditRequest(
             checkpoint=args.checkpoint,
             output=args.output,
-            perturbation=Perturbation(condition_id="audit", vial_mass_kg=args.mass, recoverable=True),
+            perturbation=Perturbation(
+                condition_id="audit",
+                vial_mass_kg=args.mass,
+                recoverable=True,
+                vial_friction_coeff=args.friction,
+                actuator_gain_multiplier=args.actuator_gain,
+            ),
             candidate=Candidate(
                 candidate_id="audit", arm_scale_multiplier=args.arm, jaw_scale_multiplier=args.jaw
             ),

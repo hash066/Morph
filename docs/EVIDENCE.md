@@ -207,3 +207,15 @@ aborts, timeouts, or unsafe rack contacts. This is a robustness observation, not
 required failure and not a recovery claim. Morph will probe other validated physical
 conditions or tighten the bounded perturbation definition before candidate selection.
 Evidence: docs/verification/perturbation-mass030-audit.json.
+
+## Repeatable failure and development recovery
+A bounded 1.5x actuator-calibration multiplier produced a meaningful failure on the eight
+development starts: 3/8 successes, five timeouts, and one unsafe rack contact. Applying a
+two-thirds controller-scale compensation restored 8/8 with no unsafe contacts, validating
+that the allowed controller parameters materially affect the outcome. Live Nemotron then
+selected balanced_75 from the real development observations. It passed 8/8 in 6.60 seconds
+mean completion time. A deterministic random-seed-42 selection, arm67_jaw80, also passed
+8/8, with 7.78 seconds mean completion time. No superiority claim is made before held-out
+evaluation. The evaluator hash, development starts, held-out starts 64..71, condition,
+candidate selections, and one-shot policy were frozen before held-out execution in
+docs/verification/frozen-protocol.json.

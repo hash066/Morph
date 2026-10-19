@@ -1,3 +1,4 @@
+param([ValidateSet('check', 'recovery')][string]$Mode = 'check')
 $ErrorActionPreference = 'Stop'
 Set-Location -LiteralPath 'E:/Winter/Morph'
 $morphKeyPath = 'E:/Winter/Morph/data/nebius-key.dpapi'
@@ -16,7 +17,12 @@ $morphKeyBytes = [System.Security.Cryptography.ProtectedData]::Unprotect(
 )
 try {
     $env:NEBIUS_API_KEY = $morphEncoding.GetString($morphKeyBytes).Trim()
-    & 'E:/Winter/Morph/.venv/Scripts/python.exe' 'E:/Winter/Morph/scripts/live_planner_check.py'
+    $morphScript = if ($Mode -eq 'recovery') {
+        'E:/Winter/Morph/scripts/live_recovery_selection.py'
+    } else {
+        'E:/Winter/Morph/scripts/live_planner_check.py'
+    }
+    & 'E:/Winter/Morph/.venv/Scripts/python.exe' $morphScript
     if ($LASTEXITCODE -ne 0) { throw 'Live planner check failed.' }
 } finally {
     Remove-Item Env:NEBIUS_API_KEY -ErrorAction SilentlyContinue

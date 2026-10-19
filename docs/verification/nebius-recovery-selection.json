@@ -1,0 +1,57 @@
+{
+  "checked_at": "2026-10-19T15:12:26.205180+00:00",
+  "kind": "live_nebius_nemotron_recovery_selection",
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "source_evidence": "docs/verification/perturbation-actuator150-audit.json",
+  "observations": [
+    {
+      "candidate_id": "fault_baseline",
+      "successes": 3,
+      "episodes": 8,
+      "aborts": 0,
+      "unsafe": 1,
+      "mean_completion_seconds": 6.055555979410808
+    },
+    {
+      "candidate_id": "balanced_67",
+      "successes": 8,
+      "episodes": 8,
+      "aborts": 0,
+      "unsafe": 0,
+      "mean_completion_seconds": 7.825000524520874
+    }
+  ],
+  "candidate_registry": [
+    {
+      "candidate_id": "balanced_67",
+      "arm_scale_multiplier": 0.6666666666666666,
+      "jaw_scale_multiplier": 0.6666666666666666
+    },
+    {
+      "candidate_id": "balanced_75",
+      "arm_scale_multiplier": 0.75,
+      "jaw_scale_multiplier": 0.75
+    },
+    {
+      "candidate_id": "arm67_jaw80",
+      "arm_scale_multiplier": 0.6666666666666666,
+      "jaw_scale_multiplier": 0.8
+    },
+    {
+      "candidate_id": "arm80_jaw67",
+      "arm_scale_multiplier": 0.8,
+      "jaw_scale_multiplier": 0.6666666666666666
+    }
+  ],
+  "proposal": {
+    "hypotheses": [
+      "Increasing arm and jaw scale multipliers from 0.666 to 0.75 will maintain a high success rate (\u226575%) while reducing mean completion time compared to the 0.666 setting.",
+      "The unsafe rate will remain zero for the 0.75 scaling.",
+      "Success count will be at least 6 out of 8 episodes."
+    ],
+    "candidate_id": "balanced_75",
+    "reason": "Observations show that scaling both arm and jaw to 0.666 yields perfect safety and success but slower execution (~7.8s). The baseline (presumed scale 1.0) had lower success and an unsafe event. An intermediate scale of 0.75 may improve speed while preserving safety and success, making it a logical next bounded experiment.",
+    "decision": "experiment"
+  },
+  "recovery_claimed": false
+}
