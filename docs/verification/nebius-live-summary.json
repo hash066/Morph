@@ -2,12 +2,12 @@
   "kind": "live_nebius_nemotron_integration_summary",
   "operator_cap_usd": 30.0,
   "durable_inference_ledger_cap_usd": 1.0,
-  "measured_total_cost_usd": 0.00099072,
-  "attempts": 3,
-  "validated_attempts": 1,
+  "measured_total_cost_usd": 0.00288942,
+  "attempts": 6,
+  "validated_attempts": 4,
   "validated_model": "nvidia/nemotron-3-super-120b-a12b",
-  "validated_decision": "insufficient_evidence",
-  "simulation_observations_supplied": 0,
+  "validated_decision": "experiment",
+  "simulation_observations_supplied": 2,
   "recovery_claimed": false,
   "cloud_compute_started": false
 }
