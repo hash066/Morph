@@ -24,3 +24,8 @@ line-length = 110
 [tool.mypy]
 files = ["src/morph"]
 check_untyped_defs = true
+
+[tool.coverage.run]
+# Simulator overlays and the CLI are exercised by preserved real-runtime audits.
+# Unit coverage gates the deterministic orchestration core.
+omit = ["src/morph/isaac_callback.py", "src/morph/isaac_runner.py", "src/morph/__main__.py"]
