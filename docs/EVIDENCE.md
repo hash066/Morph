@@ -264,3 +264,14 @@ unsafe contacts but a slower 8.05-second successful mean versus Morph's 6.68 sec
 recovery, not Nemotron superiority over simple search. The protocol, audits and summary are under
 docs/verification/confirmation-*.json. The deterministic confirmation bundle SHA-256 is
 `30ad087c0ebad407da35e4aeba15a100e294806b5468d058166e8e91469817f4`.
+
+## Operator workbench redesign
+The workbench was rebuilt around the complete review workflow: recovery overview, selectable
+episode outcomes, frozen condition/policy/evaluator readback, matched method comparison, live
+authenticated queue visibility, and evidence download. Frozen confirmation evidence and status
+are public read-only endpoints so a reviewer does not handle an operator secret; all run admission,
+cancellation, and private run exports remain bearer-authenticated. The live browser loaded all
+three 40-case audit datasets successfully. The confirmation ZIP is served directly from the
+Evidence view. The production React build passed and the complete Python regression suite remains
+43/43 passing. This UI does not fabricate trajectory video; episode replay remains outcome and
+event readback until real per-step telemetry is captured.

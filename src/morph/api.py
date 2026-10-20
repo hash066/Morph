@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Annotated
 
 from fastapi import Depends, FastAPI, Header, HTTPException, Query
-from fastapi.responses import Response
+from fastapi.responses import FileResponse, Response
 
 from morph.contracts import Budget, RecoveryPackage, RunManifest, RunResult
 from morph.evidence import export_bundle
@@ -30,7 +30,9 @@ def create_app(store: Store | None = None, token: str | None = None) -> FastAPI:
         if not secrets.compare_digest(authorization or "", "Bearer " + access_token):
             raise HTTPException(401, "Bearer authorization required")
 
-    app = FastAPI(title="Morph", version="0.1.0", dependencies=[Depends(authorize)])
+    # Frozen evidence is public/read-only so reviewers do not handle an operator
+    # secret. Queue and export operations remain authenticated.
+    app = FastAPI(title="Morph", version="0.1.0")
 
     @app.get("/api/v1/status")
     def status():
@@ -68,12 +70,23 @@ def create_app(store: Store | None = None, token: str | None = None) -> FastAPI:
             raise HTTPException(404, "Unknown evidence audit")
         return json.loads((VERIFICATION / filename).read_text(encoding="utf-8"))
 
+    @app.get("/api/v1/evidence/bundle")
+    def confirmation_bundle():
+        path = ROOT / "dist" / "morph-confirmation-evidence-v1.zip"
+        if not path.is_file():
+            raise HTTPException(404, "Confirmation evidence bundle is not available")
+        return FileResponse(path, media_type="application/zip", filename=path.name)
+
     @app.get("/api/v1/runs")
-    def runs(limit: Annotated[int, Query(ge=1, le=100)] = 100, offset: Annotated[int, Query(ge=0)] = 0):
+    def runs(
+        limit: Annotated[int, Query(ge=1, le=100)] = 100,
+        offset: Annotated[int, Query(ge=0)] = 0,
+        _: None = Depends(authorize),
+    ):
         return {"data": database.list(limit, offset)}
 
     @app.post("/api/v1/runs", status_code=201)
-    def submit(manifest: RunManifest):
+    def submit(manifest: RunManifest, _: None = Depends(authorize)):
         try:
             validate_execution_manifest(manifest, ROOT)
             key = database.submit(manifest)
@@ -88,7 +101,7 @@ def create_app(store: Store | None = None, token: str | None = None) -> FastAPI:
             raise HTTPException(404, "Run not found") from None
 
     @app.get("/api/v1/runs/{run_id}")
-    def run(run_id: str):
+    def run(run_id: str, _: None = Depends(authorize)):
         row = lookup(run_id)
         return {
             "id": row["id"],
@@ -99,13 +112,13 @@ def create_app(store: Store | None = None, token: str | None = None) -> FastAPI:
         }
 
     @app.post("/api/v1/runs/{run_id}/cancel")
-    def cancel(run_id: str):
+    def cancel(run_id: str, _: None = Depends(authorize)):
         lookup(run_id)
         database.cancel(run_id)
         return {"id": run_id, "state": database.get(run_id)["state"]}
 
     @app.get("/api/v1/runs/{run_id}/package")
-    def package(run_id: str):
+    def package(run_id: str, _: None = Depends(authorize)):
         row = lookup(run_id)
         manifest = RunManifest.model_validate_json(row["manifest"])
         results = (RunResult.model_validate_json(row["result"]),) if row["result"] else ()
@@ -126,7 +139,7 @@ def create_app(store: Store | None = None, token: str | None = None) -> FastAPI:
         )
 
     @app.get("/api/v1/runs/{run_id}/bundle")
-    def bundle(run_id: str):
+    def bundle(run_id: str, _: None = Depends(authorize)):
         row = lookup(run_id)
         manifests = (RunManifest.model_validate_json(row["manifest"]),)
         results = (RunResult.model_validate_json(row["result"]),) if row["result"] else ()
