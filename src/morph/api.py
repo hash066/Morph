@@ -70,6 +70,20 @@ def create_app(store: Store | None = None, token: str | None = None) -> FastAPI:
             raise HTTPException(404, "Unknown evidence audit")
         return json.loads((VERIFICATION / filename).read_text(encoding="utf-8"))
 
+    @app.get("/api/v1/evidence/context")
+    def evidence_context():
+        # Read-only planner and pilot records the workbench narrates beside the confirmation.
+        files = {
+            "planner": "nebius-recovery-selection.json",
+            "planner_usage": "nebius-live-summary.json",
+            "pilot": "heldout-summary.json",
+        }
+        context = {}
+        for key, filename in files.items():
+            path = VERIFICATION / filename
+            context[key] = json.loads(path.read_text(encoding="utf-8")) if path.is_file() else None
+        return context
+
     @app.get("/api/v1/evidence/bundle")
     def confirmation_bundle():
         path = ROOT / "dist" / "morph-confirmation-evidence-v1.zip"

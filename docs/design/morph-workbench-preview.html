@@ -1,0 +1,396 @@
+<title>Morph Workbench</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Martian+Mono:wdth,wght@75..100,400..600&display=swap">
+<style>
+/* Instrument spec sheet: concrete paper, graphite ink, one safety-yellow signal. Hairline rules, no cards, no shadows. */
+:root{
+  color-scheme:light;
+  --paper:#EEEFEA; --ink:#141518; --signal:#FFC629;
+  --ink-70:rgba(20,21,24,.70); --ink-50:rgba(20,21,24,.52); --ink-12:rgba(20,21,24,.12); --ink-06:rgba(20,21,24,.05);
+  --sans:"Archivo",system-ui,sans-serif; --mono:"Martian Mono",ui-monospace,Menlo,monospace;
+  --hazard:repeating-linear-gradient(135deg,var(--ink) 0 3px,var(--signal) 3px 7px);
+}
+*{box-sizing:border-box}
+html{background:var(--paper);scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 15px/1.6 var(--sans);font-stretch:100%;
+  padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px))}
+.w{max-width:1180px;margin:0 auto}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;padding:0}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.mono{font-family:var(--mono);font-stretch:87.5%;font-size:11px;letter-spacing:.02em;text-transform:uppercase}
+.m50{color:var(--ink-50)}
+::selection{background:var(--signal)}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--paper);border-bottom:1px solid var(--ink)}
+.top .w{display:flex;align-items:center;gap:28px;height:56px}
+.word{font:800 19px var(--sans);font-stretch:125%;letter-spacing:.04em}
+.links{display:flex;gap:22px;margin-right:auto;overflow-x:auto}
+.links a{color:var(--ink-50);text-decoration:none;padding:18px 0 16px;border-bottom:3px solid transparent;white-space:nowrap;transition:color .2s}
+.links a:hover{color:var(--ink)}
+.links a.on{color:var(--ink);border-bottom-color:var(--signal)}
+.lock{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.lock i{width:10px;height:10px;background:var(--signal);outline:1px solid var(--ink)}
+
+/* section scaffolding */
+section{border-bottom:1px solid var(--ink);padding-block:56px}
+.sh{display:grid;grid-template-columns:120px minmax(0,1fr);gap:24px;margin-bottom:36px}
+.sh .n{padding-top:6px}
+h1,h2,h3{margin:0;font-weight:700;font-stretch:112%;letter-spacing:-.02em;text-wrap:balance}
+h2{font-size:clamp(26px,3.2vw,38px);line-height:1.08}
+.lede{color:var(--ink-70);max-width:58ch;margin:12px 0 0;font-size:16px}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:48px;align-items:start}
+.hero h1{font-size:clamp(34px,4.2vw,52px);line-height:.98;margin:18px 0 0;font-stretch:115%}
+.hero h1 mark{background:linear-gradient(transparent 58%,var(--signal) 58%,var(--signal) 92%,transparent 92%);color:inherit;padding:0 .04em}
+.score{display:flex;align-items:flex-end;gap:22px;margin:40px 0 28px;flex-wrap:wrap}
+.score .v{font:800 clamp(72px,10vw,128px)/.82 var(--sans);font-stretch:62%;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.score .v small{font-size:.32em;font-stretch:100%;color:var(--ink-50);margin-left:4px}
+.score .arrow{font:400 40px/1 var(--sans);color:var(--ink-50);padding-bottom:14px}
+.score .v.dim{color:var(--ink-50)}
+.score label{display:block;margin-top:10px}
+.actions{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.btn{background:var(--ink);color:var(--paper);padding:14px 20px;font-weight:600;font-stretch:108%;display:inline-flex;gap:12px;align-items:center;transition:background .2s,color .2s}
+.btn:hover{background:var(--signal);color:var(--ink)}
+.btn:disabled{opacity:.4;cursor:not-allowed;background:var(--ink);color:var(--paper)}
+.tl{color:var(--ink);text-decoration:none;font-weight:600;border-bottom:1px solid var(--ink);padding-bottom:2px}
+.tl:hover{background:var(--signal)}
+
+/* viewport */
+.vp{border:1px solid var(--ink);background:var(--paper)}
+.vp-h,.vp-f{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;flex-wrap:wrap}
+.vp-h{border-bottom:1px solid var(--ink)}
+.vp-f{border-top:1px solid var(--ink);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:0}
+.vp-f div{padding:10px 12px;border-left:1px solid var(--ink-12)}
+.vp-f div:first-child{border-left:0}
+.vp-f b{display:block;font:500 14px var(--mono);font-stretch:87.5%;font-variant-numeric:tabular-nums;margin-top:2px;text-transform:none}
+.tog{display:flex;border:1px solid var(--ink)}
+.tog button{padding:6px 12px}
+.tog button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.vp svg{display:block;width:100%;height:auto;background-image:radial-gradient(var(--ink-12) 1px,transparent 1px);background-size:20px 20px}
+.flag{position:absolute;right:12px;top:12px;padding:5px 9px;background:var(--paper);border:1px solid var(--ink);opacity:0;transition:opacity .25s}
+.flag.show{opacity:1}
+.flag.bad{background:var(--signal)}
+
+/* metric strip */
+.strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--ink);margin-top:56px}
+.strip>div{padding:20px 20px 4px;border-left:1px solid var(--ink-12)}
+.strip>div:first-child{border-left:0;padding-left:0}
+.strip strong{display:block;font:700 40px/1.05 var(--sans);font-stretch:75%;margin:10px 0 6px;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.strip p{margin:0;color:var(--ink-70);font-size:13.5px}
+
+/* investigation */
+.two{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px}
+.steps{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.steps li{display:grid;grid-template-columns:44px minmax(0,1fr) 70px;gap:12px;padding:16px 0;border-bottom:1px solid var(--ink-12);align-items:baseline;transition:background .3s}
+.steps li b{font-weight:600;font-stretch:108%}
+.steps li p{margin:2px 0 0;color:var(--ink-70);font-size:14px}
+.steps .s{text-align:right}
+.steps li.run{background:linear-gradient(90deg,var(--signal) 0 4px,transparent 4px)}
+.steps li.run .s{color:var(--ink)}
+.log{background:var(--ink);color:#E7E8E2;min-height:340px;padding:18px 20px;font:400 12px/1.9 var(--mono);font-stretch:87.5%;overflow:hidden}
+.log .ln{opacity:0;transform:translateY(4px);transition:.3s;white-space:pre-wrap;word-break:break-word}
+.log .ln.in{opacity:1;transform:none}
+.log .k{color:var(--signal)}
+.log .d{color:rgba(231,232,226,.45)}
+.log .cur{display:inline-block;width:8px;height:14px;background:var(--signal);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* comparison */
+.matrix{border-top:1px solid var(--ink)}
+.mr{display:grid;grid-template-columns:170px minmax(0,1fr) 84px;gap:20px;align-items:center;padding:16px 0;border-bottom:1px solid var(--ink-12);transition:background .2s}
+.mr:hover{background:var(--ink-06)}
+.mr b{font-weight:600;font-stretch:108%;display:block}
+.cells{display:grid;grid-template-columns:repeat(40,minmax(0,1fr));gap:3px}
+.cells i{aspect-ratio:1/2.2;background:var(--ink);transform-origin:bottom;transform:scaleY(1)}
+.cells i.u{background:var(--hazard)}
+.cells i.o{background:transparent;box-shadow:inset 0 0 0 1px var(--ink)}
+.go .cells i{animation:grow .5s cubic-bezier(.2,.8,.2,1) both}
+@keyframes grow{from{transform:scaleY(0)}}
+.mr .tot{text-align:right;font:700 24px var(--sans);font-stretch:75%;font-variant-numeric:tabular-nums}
+.key{display:flex;gap:22px;flex-wrap:wrap;margin-top:14px}
+.key span{display:inline-flex;align-items:center;gap:8px}
+.key i{width:9px;height:18px;background:var(--ink)}
+.key i.u{background:var(--hazard)}.key i.o{background:transparent;box-shadow:inset 0 0 0 1px var(--ink)}
+.tblw{overflow-x:auto;margin-top:48px}
+table{width:100%;border-collapse:collapse;min-width:620px}
+th{text-align:left;font-weight:400;padding:0 12px 10px 0;border-bottom:1px solid var(--ink)}
+td{padding:16px 12px 16px 0;border-bottom:1px solid var(--ink-12);font-variant-numeric:tabular-nums;vertical-align:baseline}
+td .sub{display:block;color:var(--ink-50);font-size:13px}
+td.num{font:600 18px var(--sans);font-stretch:85%}
+tr.pick td:first-child b{background:var(--signal);padding:1px 4px;margin-left:-4px}
+.ci{margin-top:56px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:40px;align-items:center}
+.ci svg{width:100%;height:auto;display:block}
+.ci svg text{font-family:var(--mono);font-size:10.5px;fill:var(--ink-50);text-transform:uppercase}
+.ci svg .lbl{font-family:var(--sans);font-size:14px;fill:var(--ink);font-weight:600;text-transform:none}
+.ci .bar{stroke-dasharray:var(--len);stroke-dashoffset:var(--len)}
+.go .ci .bar{animation:draw 1.1s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.ci p{color:var(--ink-70);margin:0}
+
+/* evidence */
+.decision{font:500 clamp(26px,4.2vw,52px)/1.1 var(--mono);font-stretch:75%;letter-spacing:-.02em;word-break:break-all;text-transform:none}
+.decision span{background:var(--signal);padding:0 .12em}
+.ev{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(0,1fr);border-top:1px solid var(--ink);margin-top:40px}
+.ev>div{padding:22px 24px 0;border-left:1px solid var(--ink-12)}
+.ev>div:first-child{border-left:0;padding-left:0}
+.hash{font:400 12px/1.7 var(--mono);font-stretch:87.5%;word-break:break-all;margin:12px 0 16px}
+.ev ul{list-style:none;margin:12px 0 0;padding:0}
+.ev li{padding:9px 0;border-bottom:1px solid var(--ink-12);font-size:14.5px;display:flex;gap:10px}
+.ev li::before{content:"";flex:none;width:8px;height:8px;margin-top:8px;background:var(--ink)}
+.ev .no li::before{background:transparent;box-shadow:inset 0 0 0 1px var(--ink)}
+.copy{border-bottom:1px solid var(--ink);font-weight:600;padding-bottom:2px}
+.copy:hover{background:var(--signal)}
+footer{padding-block:28px 48px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+@media (max-width:920px){
+  .hero,.two,.ci{grid-template-columns:1fr}.strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .strip>div:nth-child(3){border-left:0;padding-left:0}.ev{grid-template-columns:1fr}.ev>div{border-left:0;padding-left:0}
+  .sh{grid-template-columns:1fr;gap:6px}.lock span{display:none}
+}
+@media (max-width:560px){
+  .links{display:none}.mr{grid-template-columns:1fr 60px}.mr .cells{grid-column:1/-1;grid-row:2}
+  .vp-f{grid-template-columns:repeat(2,minmax(0,1fr))}.vp-f div:nth-child(3){border-left:0}
+  .strip{grid-template-columns:1fr}.strip>div{border-left:0;padding-left:0}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+
+<header class="top">
+  <div class="w">
+    <div class="word">MORPH</div>
+    <nav class="links mono" aria-label="Sections">
+      <a href="#failure" class="on">01 Failure</a><a href="#investigation">02 Investigation</a><a href="#comparison">03 Comparison</a><a href="#evidence">04 Evidence</a>
+    </nav>
+    <div class="lock mono"><i></i><span>Sim only &middot; motion locked</span></div>
+  </div>
+</header>
+
+<main class="w">
+  <section id="failure" style="border-bottom:0;padding-bottom:0">
+    <div class="hero">
+      <div>
+        <div class="mono m50">SO-101 vial placement &nbsp;/&nbsp; fault actuator150 &nbsp;/&nbsp; gain &times;1.5</div>
+        <h1>The arm started missing the rack. Morph found a fix and <mark>checked it on 40 new starts.</mark></h1>
+        <div class="score">
+          <div><div class="v dim"><span data-n="15">15</span><small>/40</small></div><label class="mono m50">Before</label></div>
+          <div class="arrow">&rarr;</div>
+          <div><div class="v"><span data-n="39">39</span><small>/40</small></div><label class="mono m50">After</label></div>
+        </div>
+        <div class="actions">
+          <button class="btn" id="replay">Replay investigation <span aria-hidden="true">&rarr;</span></button>
+          <a class="tl" href="#evidence">Read the evidence</a>
+        </div>
+      </div>
+
+      <div class="vp">
+        <div class="vp-h">
+          <span class="mono">Viewport &middot; illustrative</span>
+          <div class="tog mono" role="group" aria-label="Controller"><button data-m="base" aria-pressed="false">Baseline</button><button data-m="morph" aria-pressed="true">Morph</button></div>
+        </div>
+        <div style="position:relative">
+          <svg id="arm" viewBox="0 0 480 290" role="img" aria-label="Robot arm placing a vial into a rack. Baseline collides with the rack; Morph places the vial in the slot."></svg>
+          <div class="flag mono" id="flag"></div>
+        </div>
+        <div class="vp-f mono">
+          <div class="m50">EE x<b id="rx">0.0</b></div><div class="m50">EE y<b id="ry">0.0</b></div>
+          <div class="m50">q1 / q2<b id="rq">0 / 0</b></div><div class="m50">t<b id="rt">0.00 s</b></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="strip">
+      <div><span class="mono m50">Paired gain</span><strong>+<span data-n="60">60</span> pp</strong><p>95% interval 0.17 to 1.00</p></div>
+      <div><span class="mono m50">Unsafe contacts</span><strong><span data-n="13">13</span> &rarr; <span data-n="1">1</span></strong><p>Rack collisions, baseline to Morph</p></div>
+      <div><span class="mono m50">Mean completion</span><strong><span data-n="6.68" data-d="2">6.68</span> s</strong><p>Random search took 8.05 s</p></div>
+      <div><span class="mono m50">Planner spend</span><strong>$<span data-n="0.0029" data-d="4">0.0029</span></strong><p>6 Nemotron calls in total</p></div>
+    </div>
+  </section>
+
+  <section id="investigation" style="border-top:1px solid var(--ink);margin-top:56px">
+    <div class="sh"><div class="mono m50 n">02</div><div><h2>How the investigation ran</h2><p class="lede">The planner only ever saw development starts. It picked from a fixed list, and the validator rejected anything else.</p></div></div>
+    <div class="two">
+      <ol class="steps" id="steps">
+        <li><span class="mono m50">A</span><div><b>Reproduce the fault</b><p>Gain drift dropped development success to 3/8.</p></div><span class="mono m50 s">Done</span></li>
+        <li><span class="mono m50">B</span><div><b>Ask Nemotron</b><p>It selected balanced-0.75 from the allowed set.</p></div><span class="mono m50 s">Done</span></li>
+        <li><span class="mono m50">C</span><div><b>Development check</b><p>8/8 development starts passed.</p></div><span class="mono m50 s">Done</span></li>
+        <li><span class="mono m50">D</span><div><b>Confirm on unseen starts</b><p>Frozen in Git first, then run on starts 80&ndash;119.</p></div><span class="mono m50 s">Done</span></li>
+        <li><span class="mono m50">E</span><div><b>Package the evidence</b><p>Manifests, episodes and checksums in one ZIP.</p></div><span class="mono m50 s">Done</span></li>
+      </ol>
+      <div class="log" id="log" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section id="comparison">
+    <div class="sh"><div class="mono m50 n">03</div><div><h2>Three controllers, 40 starts each</h2><p class="lede">Random search with the same budget did as well and was safer. Morph was faster. The claim is recovery, not that the model beats simple search.</p></div></div>
+    <div class="matrix" id="matrix">
+      <div class="mr"><div><b>Fault baseline</b><span class="mono m50">Unchanged</span></div><div class="cells" data-s="15" data-u="13" data-o="12"></div><div class="tot">15</div></div>
+      <div class="mr"><div><b>Morph + Nemotron</b><span class="mono m50">balanced-0.75</span></div><div class="cells" data-s="39" data-u="1" data-o="0"></div><div class="tot">39</div></div>
+      <div class="mr"><div><b>Matched random</b><span class="mono m50">arm .67 jaw .80</span></div><div class="cells" data-s="39" data-u="0" data-o="1"></div><div class="tot">39</div></div>
+    </div>
+    <div class="key mono m50"><span><i></i>Success</span><span><i class="u"></i>Unsafe rack contact</span><span><i class="o"></i>Other failure</span><span>Sorted by outcome. "Other" inferred from totals.</span></div>
+
+    <div class="tblw">
+      <table>
+        <thead><tr class="mono m50"><th>Method</th><th>Success</th><th>Unsafe</th><th>Mean time</th><th>Decision</th></tr></thead>
+        <tbody>
+          <tr><td><b>Fault baseline</b><span class="sub">Unchanged controller</span></td><td class="num">15 / 40</td><td class="num">13</td><td class="num">&mdash;</td><td class="mono">Failed</td></tr>
+          <tr class="pick"><td><b>Morph + Nemotron</b><span class="sub">Arm 0.75, jaw 0.75</span></td><td class="num">39 / 40</td><td class="num">1</td><td class="num">6.68 s</td><td class="mono">Selected</td></tr>
+          <tr><td><b>Matched random</b><span class="sub">Arm 0.67, jaw 0.80</span></td><td class="num">39 / 40</td><td class="num">0</td><td class="num">8.05 s</td><td class="mono">Comparator</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ci">
+      <svg id="ci" viewBox="0 0 640 180" role="img" aria-label="Paired gain intervals. Pilot with 8 starts: 0.50, interval minus 0.46 to 1.00, crosses zero. Confirmation with 40 starts: 0.60, interval 0.17 to 1.00, stays above zero."></svg>
+      <div><div class="mono m50">Is the gain real?</div><p style="margin-top:10px">The 8-start pilot crossed zero, so it proved nothing. The preregistered 40-start confirmation stayed clear of it.</p></div>
+    </div>
+  </section>
+
+  <section id="evidence">
+    <div class="sh"><div class="mono m50 n">04</div><div><div class="mono m50" style="margin-bottom:12px">Recorded decision</div><div class="decision"><span>simulation_candidate</span></div><p class="lede">Paired gain clears the conservative interval. No physical approval.</p></div></div>
+    <div class="ev">
+      <div>
+        <div class="mono m50">Confirmation bundle v1 &middot; 106,147 bytes</div>
+        <div class="hash" id="hash">30ad087c0ebad407da35e4aeba15a100e294806b5468d058166e8e91469817f4</div>
+        <button class="copy" id="copy">Copy SHA-256</button>
+      </div>
+      <div><div class="mono m50">Established</div><ul><li>Recovery in the pinned Isaac Lab simulation</li><li>Disjoint development and held-out starts</li><li>Real Nemotron calls, spend recorded</li></ul></div>
+      <div class="no"><div class="mono m50">Not established</div><ul><li>Behaviour on a real arm</li><li>Nemotron beating random search</li><li>Other faults, robots or users</li></ul></div>
+    </div>
+  </section>
+
+  <footer class="mono m50"><span>Figures from docs/verification. Viewport motion is illustrative.</span><span>Nebius GPU runner: not wired yet</span></footer>
+</main>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* scroll spy */
+  var links=[].slice.call(document.querySelectorAll('.links a'));
+  var spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-45% 0px -50% 0px'});
+  ['failure','investigation','comparison','evidence'].forEach(function(id){spy.observe($(id))});
+
+  /* count-ups when visible */
+  function countUp(el){
+    if(reduce)return;var to=+el.dataset.n,d=+(el.dataset.d||0),t0=performance.now();
+    (function f(n){var k=Math.min(1,(n-t0)/1000),e=1-Math.pow(1-k,4);el.textContent=(to*e).toFixed(d);if(k<1)requestAnimationFrame(f)})(t0);
+  }
+  var cio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){countUp(e.target);cio.unobserve(e.target)}})},{threshold:.6});
+  document.querySelectorAll('[data-n]').forEach(function(el){cio.observe(el)});
+
+  /* matrix */
+  document.querySelectorAll('.cells').forEach(function(c){
+    var h='',n=0;function add(k){h+='<i class="'+k+'" style="animation-delay:'+(n*12)+'ms"></i>';n++}
+    for(var i=0;i<+c.dataset.s;i++)add('');for(i=0;i<+c.dataset.u;i++)add('u');for(i=0;i<+c.dataset.o;i++)add('o');c.innerHTML=h;
+  });
+  var gio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('go');gio.unobserve(e.target)}})},{threshold:.25});
+  gio.observe($('comparison'));
+
+  /* interval chart */
+  (function(){
+    var x0=190,w=430,min=-0.6,max=1.0;function X(v){return x0+(v-min)/(max-min)*w}
+    var s='<defs><pattern id="hz" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="1" height="6" fill="rgba(20,21,24,.14)"/></pattern></defs>';
+    s+='<rect x="'+X(-0.6)+'" y="16" width="'+(X(0)-X(-0.6))+'" height="112" fill="url(#hz)"/>';
+    [-0.5,0,0.5,1].forEach(function(t){
+      s+='<line x1="'+X(t)+'" x2="'+X(t)+'" y1="16" y2="128" stroke="'+(t===0?'#141518':'rgba(20,21,24,.12)')+'"/>';
+      s+='<text x="'+X(t)+'" y="148" text-anchor="middle">'+(t>0?'+':'')+t.toFixed(1)+'</text>';
+    });
+    s+='<text x="'+X(-0.3)+'" y="170" text-anchor="middle">no effect</text><text x="'+X(0.5)+'" y="170" text-anchor="middle">gain</text>';
+    [{n:'Pilot, 8 starts',v:.5,lo:-.4603,hi:1,y:52,dash:true},{n:'Confirmation, 40',v:.6,lo:.1705,hi:1,y:96}].forEach(function(r){
+      var len=X(r.hi)-X(r.lo);
+      s+='<text class="lbl" x="0" y="'+(r.y+5)+'">'+r.n+'</text>';
+      s+='<line class="bar" style="--len:'+len+'" x1="'+X(r.lo)+'" x2="'+X(r.hi)+'" y1="'+r.y+'" y2="'+r.y+'" stroke="#141518" stroke-width="'+(r.dash?2:4)+'"/>';
+      s+='<line x1="'+X(r.lo)+'" x2="'+X(r.lo)+'" y1="'+(r.y-7)+'" y2="'+(r.y+7)+'" stroke="#141518" stroke-width="2"/><line x1="'+X(r.hi)+'" x2="'+X(r.hi)+'" y1="'+(r.y-7)+'" y2="'+(r.y+7)+'" stroke="#141518" stroke-width="2"/>';
+      s+='<rect x="'+(X(r.v)-7)+'" y="'+(r.y-7)+'" width="14" height="14" fill="'+(r.dash?'#EEEFEA':'#FFC629')+'" stroke="#141518" stroke-width="2"/>';
+    });
+    $('ci').innerHTML=s;
+  })();
+
+  /* investigation log */
+  var lines=[
+    ['load','frozen-protocol.json, evaluator + checkpoint hashes match'],
+    ['fault','actuator150 reproduced, development 3/8'],
+    ['plan','nemotron-3-super via token factory'],
+    ['plan','candidate balanced-0.75 accepted by validator'],
+    ['dev','balanced-0.75, 8/8 development starts'],
+    ['confirm','starts 080-119, morph 39/40, unsafe 1'],
+    ['confirm','random comparator 39/40, unsafe 0'],
+    ['decide','simulation_candidate, CI [0.171, 1.000]'],
+    ['pack','bundle 106147 B, sha256 30ad087c…'],
+  ];
+  var stepAt=[0,2,4,5,8],log=$('log'),steps=[].slice.call(document.querySelectorAll('#steps li')),timer;
+  function render(all){
+    log.innerHTML=lines.map(function(l,i){return '<div class="ln'+(all?' in':'')+'"><span class="d">'+String(i+1).padStart(2,'0')+'</span>  <span class="k">'+l[0].padEnd(7,' ')+'</span> '+l[1]+'</div>'}).join('')+'<div class="ln in"><span class="cur"></span></div>';
+  }
+  render(true);
+  $('replay').addEventListener('click',function(){
+    document.getElementById('investigation').scrollIntoView({behavior:reduce?'auto':'smooth'});
+    clearTimeout(timer);render(false);var b=this;b.disabled=true;
+    steps.forEach(function(s){s.classList.remove('run');s.querySelector('.s').textContent='Queued'});
+    var ln=[].slice.call(log.querySelectorAll('.ln')),i=0;
+    (function next(){
+      if(i>=lines.length){steps.forEach(function(s){s.classList.remove('run')});b.disabled=false;return}
+      ln[i].classList.add('in');
+      var si=-1;stepAt.forEach(function(a,k){if(i>=a)si=k});
+      steps.forEach(function(s,k){s.classList.toggle('run',k===si);s.querySelector('.s').textContent=k<si?'Done':k===si?'Running':'Queued'});
+      if(i===lines.length-1)steps[4].querySelector('.s').textContent='Done';
+      i++;timer=setTimeout(next,520);
+    })();
+  });
+
+  /* viewport arm */
+  var svg=$('arm');
+  svg.innerHTML='<defs><pattern id="hzr" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#FFC629"/><rect width="3.5" height="8" fill="#141518"/></pattern></defs>'+
+    '<line x1="0" y1="262" x2="480" y2="262" stroke="#141518"/>'+
+    '<rect x="62" y="238" width="56" height="24" fill="#141518"/>'+
+    '<rect id="rL" x="314" y="226" width="32" height="36" fill="#EEEFEA" stroke="#141518" stroke-width="1.5"/>'+
+    '<rect id="rR" x="376" y="226" width="32" height="36" fill="#EEEFEA" stroke="#141518" stroke-width="1.5"/>'+
+    '<line x1="361" y1="270" x2="361" y2="280" stroke="#141518"/><text x="361" y="288" text-anchor="middle" style="font:9px var(--mono);fill:rgba(20,21,24,.5)">SLOT</text>'+
+    '<line id="path" stroke="rgba(20,21,24,.3)" stroke-dasharray="3 4"/>'+
+    '<line id="l1" stroke="#141518" stroke-width="12" stroke-linecap="square"/><line id="l2" stroke="#141518" stroke-width="8" stroke-linecap="square"/>'+
+    '<circle id="j0" r="8" fill="#EEEFEA" stroke="#141518" stroke-width="3"/><circle id="j1" r="6" fill="#EEEFEA" stroke="#141518" stroke-width="3"/>'+
+    '<g id="vial"><rect x="-9" y="0" width="18" height="34" fill="#FFC629" stroke="#141518" stroke-width="1.5"/><rect x="-9" y="0" width="18" height="7" fill="#141518"/></g>';
+  var B={x:90,y:238},L1=170,L2=150,mode='morph',t0=performance.now(),flag=$('flag');
+  function setMode(m){mode=m;t0=performance.now();flag.className='flag mono';
+    document.querySelectorAll('.tog button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.m===m))})}
+  document.querySelectorAll('.tog button').forEach(function(b){b.addEventListener('click',function(){setMode(b.dataset.m)})});
+  function ease(k){return k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2}
+  function lerp(a,b,k){return a+(b-a)*k}
+  function set(el,o){for(var k in o)el.setAttribute(k,o[k])}
+  function frame(now){
+    var T=(now-t0)/1000,base=mode==='base',tx=base?392:361,ty=base?190:222,hi=128,x,y;
+    if(T<1.4){var k=ease(T/1.4);x=lerp(168,tx,k);y=lerp(140,hi,k)}
+    else if(T<2.3){x=tx;y=lerp(hi,ty,ease((T-1.4)/.9))}else{x=tx;y=ty}
+    var dx=x-B.x,dy=y-B.y,d=Math.hypot(dx,dy);
+    var a1=Math.atan2(dy,dx)-Math.acos(Math.min(1,(d*d+L1*L1-L2*L2)/(2*d*L1)));
+    var ex=B.x+L1*Math.cos(a1),ey=B.y+L1*Math.sin(a1);
+    var a2=Math.atan2(y-ey,x-ex);
+    var vx=x,vy=y,rot=0;
+    if(base&&T>=2.3){var q=Math.min(1,(T-2.3)/.8);vx=x+q*48;vy=y+q*q*72;rot=q*84}
+    set($('l1'),{x1:B.x,y1:B.y,x2:ex,y2:ey});set($('l2'),{x1:ex,y1:ey,x2:x,y2:y});
+    set($('j0'),{cx:B.x,cy:B.y});set($('j1'),{cx:ex,cy:ey});
+    set($('path'),{x1:tx,y1:hi,x2:tx,y2:ty});
+    $('vial').setAttribute('transform','translate('+vx+' '+vy+') rotate('+rot+' 0 17)');
+    $('rR').setAttribute('fill',base&&T>=2.1&&T<3.6?'url(#hzr)':'#EEEFEA');
+    $('rx').textContent=x.toFixed(1);$('ry').textContent=(262-y).toFixed(1);
+    $('rq').textContent=Math.round(-a1*180/Math.PI)+'° / '+Math.round((a2-a1)*180/Math.PI)+'°';
+    $('rt').textContent=Math.min(T,5).toFixed(2)+' s';
+    if(T>2.5&&flag.className.indexOf('show')<0){flag.textContent=base?'Unsafe rack contact':'Placed in slot';flag.className='flag mono show'+(base?' bad':'')}
+    if(T>5.4){t0=now;flag.className='flag mono'}
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  var c=$('copy');
+  c.addEventListener('click',function(){
+    var t=$('hash').textContent;
+    function sel(){var r=document.createRange();r.selectNodeContents($('hash'));var g=getSelection();g.removeAllRanges();g.addRange(r)}
+    try{navigator.clipboard.writeText(t).then(function(){c.textContent='Copied';setTimeout(function(){c.textContent='Copy SHA-256'},1500)},sel)}catch(e){sel()}
+  });
+})();
+</script>

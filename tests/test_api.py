@@ -17,6 +17,10 @@ def test_api_auth_gate_empty_and_export(store, manifest):
     assert confirmation_bundle.headers["content-type"] == "application/zip"
     assert client.get("/api/v1/evidence/audits/morph").json()["summary"]["unsafe_rack_contacts"] == 1
     assert client.get("/api/v1/evidence/audits/secret").status_code == 404
+    context = client.get("/api/v1/evidence/context").json()
+    assert context["planner"]["proposal"]["candidate_id"] == "balanced_75"
+    assert context["planner_usage"]["attempts"] == 6
+    assert context["pilot"]["morph_report"]["denominator"] == 8
     assert client.get("/api/v1/runs").json() == {"data": []}
     assert client.post("/api/v1/runs", json=manifest.model_dump(mode="json")).status_code == 409
     assert store.list() == []

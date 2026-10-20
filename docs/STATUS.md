@@ -24,7 +24,7 @@ the full recovery product and first live gate are not complete.
 | Auditable simulator runner | IMPLEMENTED / LOCALLY TESTED: fixed command, bounded starts, checkpoint/condition/action readback | src/morph/isaac_runner.py |
 | Nebius compute | BLOCKED: no verified project credits/quota/rates | environments/COMPUTE_GATE.md |
 | Live Nemotron inference | PASS: operator authorized $30 maximum; internal ledger capped at $1; 6 measured calls cost $0.00288942 total; real evidence-driven experiment selected | docs/verification/nebius-live-summary.json |
-| React workbench/browser evidence | IMPLEMENTED / LIVE BROWSER VERIFIED: redesigned operator workbench opens frozen evidence without token friction; overview, interactive episode investigation, comparison, authenticated queue visibility, and direct confirmation-bundle download use real API data. Production build and 43-test regression pass. | web/, docs/verification/confirmation-summary.json |
+| React workbench/browser evidence | IMPLEMENTED / LOCAL BROWSER CHECKED: single-page instrument-style redesign (failure, investigation replay, per-start comparison matrix with evaluator readback, interval chart, evidence bundle, operator run queue) reads live API data, including the new read-only /api/v1/evidence/context planner and pilot records. Arm viewport is labelled illustrative. Production build and 43-test regression pass. | web/src/, src/morph/api.py |
 | Hardware | DISABLED: no supervised approved setup | no motion adapter exists |
 | Usability/buyer evidence | NOT PERFORMED; concrete tester guide, consent boundaries, tasks, outreach copy, and issue form ready | docs/TESTER_GUIDE.md |
 
